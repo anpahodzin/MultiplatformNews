@@ -31,6 +31,11 @@ kotlin {
         it.binaries.framework {
             baseName = "ComposeApp"
             isStatic = true
+            export(projects.domainModule)
+            export(projects.dataModule)
+
+            export(libs.decompose)
+            export(libs.essenty)
         }
     }
 
@@ -49,7 +54,8 @@ kotlin {
             implementation(compose.materialIconsExtended)
             @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
             implementation(compose.components.resources)
-            implementation(libs.decompose)
+            api(libs.decompose)
+            api(libs.essenty)
             implementation(libs.decompose.compose)
             implementation(libs.composeImageLoader)
             implementation(libs.kermit)
@@ -81,11 +87,18 @@ kotlin {
             implementation(compose.html.core)
         }
 
-        iosMain.dependencies {
-            implementation(libs.ktor.client.darwin)
-            implementation(libs.sqlDelight.driver.native)
+        val iosX64Main by getting {}
+        val iosArm64Main by getting {}
+        val iosSimulatorArm64Main by getting {}
+        val iosMain by creating {
+            iosX64Main.dependsOn(this)
+            iosArm64Main.dependsOn(this)
+            iosSimulatorArm64Main.dependsOn(this)
+            dependencies {
+                api(projects.domainModule)
+                api(projects.dataModule)
+            }
         }
-
     }
 }
 

@@ -6,6 +6,7 @@ import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.value.Value
 import kotlinx.serialization.Serializable
+import main.component.MainDefaultComponent
 
 class RootDefaultComponent(
     componentContext: ComponentContext
@@ -20,7 +21,7 @@ class RootDefaultComponent(
     ) { config: Config, componentContext: ComponentContext ->
         when (config) {
             is Config.Main -> {
-                RootComponent.Child.Main()
+                RootComponent.Child.Main(MainDefaultComponent(componentContext))
             }
         }
     }
