@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.compose)
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinx.serialization)
+    id("dev.icerock.mobile.multiplatform-resources")
 }
 
 kotlin {
@@ -36,6 +37,7 @@ kotlin {
 
             export(libs.decompose)
             export(libs.essenty)
+            export(libs.moko.resources)
         }
     }
 
@@ -45,24 +47,28 @@ kotlin {
                 optIn("org.jetbrains.compose.resources.ExperimentalResourceApi")
             }
         }
-        commonMain.dependencies {
-            implementation(projects.domainModule)
-            implementation(projects.dataModule)
+        val commonMain by getting {
+            dependencies {
+                implementation(projects.domainModule)
+                implementation(projects.dataModule)
+                implementation(projects.mokoResourcesCompose)
 
-            implementation(compose.runtime)
-            implementation(compose.material)
-            implementation(compose.materialIconsExtended)
-            @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
-            implementation(compose.components.resources)
-            api(libs.decompose)
-            api(libs.essenty)
-            implementation(libs.decompose.compose)
-            implementation(libs.composeImageLoader)
-            implementation(libs.kermit)
-            implementation(libs.kotlinx.coroutines.core)
-            implementation(libs.kotlinx.serialization.json)
-            implementation(libs.kotlinx.datetime)
-            implementation(libs.koin.core)
+                implementation(compose.runtime)
+                implementation(compose.material)
+                implementation(compose.materialIconsExtended)
+                @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
+                implementation(compose.components.resources)
+                api(libs.decompose)
+                api(libs.essenty)
+                implementation(libs.decompose.compose)
+                implementation(libs.composeImageLoader)
+                implementation(libs.kermit)
+                implementation(libs.kotlinx.coroutines.core)
+                implementation(libs.kotlinx.serialization.json)
+                implementation(libs.kotlinx.datetime)
+                implementation(libs.koin.core)
+                api(libs.moko.resources)
+            }
         }
 
         commonTest.dependencies {
@@ -76,21 +82,34 @@ kotlin {
             implementation(libs.kotlinx.coroutines.android)
         }
 
-        jvmMain.dependencies {
-            implementation(compose.desktop.common)
-            implementation(compose.desktop.currentOs)
-            implementation(libs.kotlinx.coroutines.swing)
-            implementation(libs.compose.uiToolingPreview)
+        val jvmMain by getting {
+            dependsOn(commonMain)
+            dependencies {
+                implementation(compose.desktop.common)
+                implementation(compose.desktop.currentOs)
+                implementation(libs.kotlinx.coroutines.swing)
+                implementation(libs.compose.uiToolingPreview)
+            }
         }
 
-        jsMain.dependencies {
-            implementation(compose.html.core)
+        val jsMain by getting {
+            dependsOn(commonMain)
+            dependencies {
+                implementation(compose.html.core)
+            }
         }
 
-        val iosX64Main by getting {}
-        val iosArm64Main by getting {}
-        val iosSimulatorArm64Main by getting {}
+        val iosX64Main by getting {
+            resources.srcDirs("build/generated/moko/iosX64Main/src")
+        }
+        val iosArm64Main by getting {
+            resources.srcDirs("build/generated/moko/iosArm64Main/src")
+        }
+        val iosSimulatorArm64Main by getting {
+            resources.srcDirs("build/generated/moko/iosSimulatorArm64Main/src")
+        }
         val iosMain by creating {
+            dependsOn(commonMain)
             iosX64Main.dependsOn(this)
             iosArm64Main.dependsOn(this)
             iosSimulatorArm64Main.dependsOn(this)
@@ -118,6 +137,7 @@ android {
         manifest.srcFile("src/androidMain/AndroidManifest.xml")
         res.srcDirs("src/androidMain/resources")
         resources.srcDirs("src/commonMain/resources")
+        java.srcDirs("build/generated/moko/androidMain/src")
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -145,4 +165,9 @@ compose.desktop {
 
 compose.experimental {
     web.application {}
+}
+
+multiplatformResources {
+    multiplatformResourcesPackage = "org.example.kmpnews" // required
+    multiplatformResourcesClassName = "MR" // optional, default MR
 }

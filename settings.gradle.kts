@@ -19,3 +19,5 @@ dependencyResolutionManagement {
 include(":composeApp")
 include(":domainModule")
 include(":dataModule")
+
+include(":moko-resources-compose")
