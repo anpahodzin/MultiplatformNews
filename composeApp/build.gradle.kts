@@ -3,17 +3,15 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 plugins {
     alias(libs.plugins.multiplatform)
     alias(libs.plugins.compose)
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.buildConfig)
+    alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinx.serialization)
-    alias(libs.plugins.sqlDelight)
 }
 
 kotlin {
     androidTarget {
         compilations.all {
             kotlinOptions {
-                jvmTarget = "17"
+                jvmTarget = "1.8"
             }
         }
     }
@@ -43,8 +41,11 @@ kotlin {
             }
         }
         commonMain.dependencies {
+            implementation(projects.domainModule)
+            implementation(projects.dataModule)
+
             implementation(compose.runtime)
-            implementation(compose.material3)
+            implementation(compose.material)
             implementation(compose.materialIconsExtended)
             @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
             implementation(compose.components.resources)
@@ -53,10 +54,8 @@ kotlin {
             implementation(libs.composeImageLoader)
             implementation(libs.kermit)
             implementation(libs.kotlinx.coroutines.core)
-            implementation(libs.ktor.core)
             implementation(libs.kotlinx.serialization.json)
             implementation(libs.kotlinx.datetime)
-            implementation(libs.multiplatformSettings)
             implementation(libs.koin.core)
         }
 
@@ -69,22 +68,17 @@ kotlin {
             implementation(libs.androidx.activityCompose)
             implementation(libs.compose.uitooling)
             implementation(libs.kotlinx.coroutines.android)
-            implementation(libs.ktor.client.okhttp)
-            implementation(libs.sqlDelight.driver.android)
         }
 
         jvmMain.dependencies {
             implementation(compose.desktop.common)
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutines.swing)
-            implementation(libs.ktor.client.okhttp)
-            implementation(libs.sqlDelight.driver.sqlite)
+            implementation(libs.compose.uiToolingPreview)
         }
 
         jsMain.dependencies {
             implementation(compose.html.core)
-            implementation(libs.ktor.client.js)
-            implementation(libs.sqlDelight.driver.js)
         }
 
         iosMain.dependencies {
@@ -97,11 +91,11 @@ kotlin {
 
 android {
     namespace = "org.example.kmpnews"
-    compileSdk = 34
+    compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
-        minSdk = 24
-        targetSdk = 34
+        minSdk = libs.versions.android.minSdk.get().toInt()
+        targetSdk = libs.versions.android.targetSdk.get().toInt()
 
         applicationId = "org.example.kmpnews.androidApp"
         versionCode = 1
@@ -113,8 +107,8 @@ android {
         resources.srcDirs("src/commonMain/resources")
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
     buildFeatures {
         compose = true
@@ -138,19 +132,4 @@ compose.desktop {
 
 compose.experimental {
     web.application {}
-}
-
-buildConfig {
-    // BuildConfig configuration here.
-    // https://github.com/gmazzo/gradle-buildconfig-plugin#usage-in-kts
-}
-
-sqldelight {
-    databases {
-        create("MyDatabase") {
-            // Database configuration here.
-            // https://cashapp.github.io/sqldelight
-            packageName.set("org.example.kmpnews.db")
-        }
-    }
 }

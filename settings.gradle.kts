@@ -1,5 +1,5 @@
 rootProject.name = "MultiplatformNews"
-include(":composeApp")
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
     repositories {
@@ -15,3 +15,7 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
+
+include(":composeApp")
+include(":domainModule")
+include(":dataModule")
