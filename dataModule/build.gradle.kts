@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.konan.properties.Properties
+
 plugins {
     alias(libs.plugins.multiplatform)
     alias(libs.plugins.androidLibrary)
@@ -77,9 +79,15 @@ android {
     }
 }
 
+@Suppress("INLINE_FROM_HIGHER_PLATFORM")
 buildConfig {
     // BuildConfig configuration here.
     // https://github.com/gmazzo/gradle-buildconfig-plugin#usage-in-kts
+    val keystoreFile = project.rootProject.file("local.properties")
+    val properties = Properties().apply { load(keystoreFile.inputStream()) }
+
+    buildConfigField("newsApiUrl", "https://newsapi.org/v2/")
+    buildConfigField("newsApiKey", properties.getProperty("NEWS_API_KEY") ?: "")
 }
 
 sqldelight {
