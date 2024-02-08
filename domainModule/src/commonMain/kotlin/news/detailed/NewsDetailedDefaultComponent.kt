@@ -9,7 +9,12 @@ import org.koin.core.component.KoinComponent
 class NewsDetailedDefaultComponent(
     private val componentContext: ComponentContext,
     private val news: News,
+    private val onBack: () -> Unit,
 ) : NewsDetailedComponent, ComponentContext by componentContext, KoinComponent {
 
     override val state: Value<News> = MutableValue(news)
+
+    override fun onBackPressed() {
+        onBack.invoke()
+    }
 }

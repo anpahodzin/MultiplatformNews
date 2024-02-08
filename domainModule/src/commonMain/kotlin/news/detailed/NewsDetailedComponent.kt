@@ -5,4 +5,6 @@ import news.News
 
 interface NewsDetailedComponent {
     val state: Value<News>
+
+    fun onBackPressed()
 }

@@ -51,7 +51,6 @@ fun NewsListContent(
     newsList: List<News>,
     onNewsSelected: (News) -> Unit
 ) {
-    WindowInsets.safeDrawing.asPaddingValues()
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = WindowInsets.safeDrawing.asPaddingValues()
@@ -98,19 +97,21 @@ fun NewsCard(
                 overflow = TextOverflow.Ellipsis
             )
             Spacer(Modifier.height(8.dp))
-            Text(
-                text = news.sourceName,
-                maxLines = 1,
-                fontSize = 12.sp,
-                style = AppTheme.typography.lightText
-            )
-            Text(
-                text = news.publishedAt.formatDDMMYYYY_HHMM(),
-                maxLines = 1,
-                fontSize = 12.sp,
-                style = AppTheme.typography.lightText,
-                color = AppColors.gray600
-            )
+            Column {
+                Text(
+                    text = news.sourceName,
+                    maxLines = 1,
+                    fontSize = 12.sp,
+                    style = AppTheme.typography.lightText
+                )
+                Text(
+                    text = news.publishedAt.formatDDMMYYYY_HHMM(),
+                    maxLines = 1,
+                    fontSize = 12.sp,
+                    style = AppTheme.typography.lightText,
+                    color = AppColors.gray600
+                )
+            }
         }
 
         if (image != null) {

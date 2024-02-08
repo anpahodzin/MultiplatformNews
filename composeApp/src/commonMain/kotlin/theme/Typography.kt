@@ -43,7 +43,7 @@ data class AppTypography internal constructor(
 ) {
     val materialTypography
         get() = Typography(
-            body1 = body1,
+            body1 = lightText,
             button = button
         )
 }
