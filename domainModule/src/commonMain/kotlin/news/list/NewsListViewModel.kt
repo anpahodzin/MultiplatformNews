@@ -1,4 +1,4 @@
-package news.component
+package news.list
 
 import core.ComponentViewModel
 import core.runCatchingCancellable

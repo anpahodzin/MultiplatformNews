@@ -1,7 +1,8 @@
-package org.example.kmpnews.news.list
+package news.list
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -28,18 +29,17 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.seiko.imageloader.rememberImagePainter
+import extension.formatDDMMYYYY_HHMM
 import news.News
-import news.component.NewsListComponent
-import news.component.NewsListUiState
-import org.example.kmpnews.theme.AppColors
-import org.example.kmpnews.theme.AppTheme
+import theme.AppColors
+import theme.AppTheme
 
 @Composable
 fun NewsListScreen(component: NewsListComponent) {
     val componentState by component.state.collectAsState()
     Box(modifier = Modifier.fillMaxSize()) {
         when (val state = componentState) {
-            is NewsListUiState.Data -> NewsListContent(state.newsList)
+            is NewsListUiState.Data -> NewsListContent(state.newsList) { component.onNewsSelected(it) }
             NewsListUiState.Error -> {}
             NewsListUiState.Loading -> {}
         }
@@ -47,20 +47,26 @@ fun NewsListScreen(component: NewsListComponent) {
 }
 
 @Composable
-fun NewsListContent(newsList: List<News>) {
+fun NewsListContent(
+    newsList: List<News>,
+    onNewsSelected: (News) -> Unit
+) {
     WindowInsets.safeDrawing.asPaddingValues()
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = WindowInsets.safeDrawing.asPaddingValues()
     ) {
         items(newsList, key = { item: News -> item.url }) {
-            NewsCard(it)
+            NewsCard(it, onNewsSelected)
         }
     }
 }
 
 @Composable
-fun NewsCard(news: News) {
+fun NewsCard(
+    news: News,
+    onNewsSelected: (News) -> Unit
+) {
     val imageSize = 150.dp
     val image = news.urlToImage
     Row(
@@ -68,6 +74,7 @@ fun NewsCard(news: News) {
             .wrapContentHeight()
             .padding(horizontal = AppTheme.sizes.medium, vertical = AppTheme.sizes.small)
             .clip(AppTheme.shapes.large)
+            .clickable { onNewsSelected(news) }
             .background(AppTheme.colors.surface)
     ) {
         Column(
@@ -98,7 +105,7 @@ fun NewsCard(news: News) {
                 style = AppTheme.typography.lightText
             )
             Text(
-                text = news.publishedAt.toString(),
+                text = news.publishedAt.formatDDMMYYYY_HHMM(),
                 maxLines = 1,
                 fontSize = 12.sp,
                 style = AppTheme.typography.lightText,

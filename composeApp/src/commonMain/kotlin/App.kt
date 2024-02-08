@@ -1,7 +1,5 @@
-package org.example.kmpnews
-
 import androidx.compose.runtime.Composable
-import org.example.kmpnews.theme.AppTheme
+import theme.AppTheme
 import root.component.RootComponent
 
 @Composable

@@ -1,4 +1,4 @@
-package org.example.kmpnews.theme
+package theme
 
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp

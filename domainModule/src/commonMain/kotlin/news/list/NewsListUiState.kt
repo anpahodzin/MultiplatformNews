@@ -1,4 +1,4 @@
-package news.component
+package news.list
 
 import news.News
 

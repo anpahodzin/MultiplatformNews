@@ -1,7 +1,9 @@
 package news
 
 import kotlinx.datetime.Instant
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class News(
     val sourceId: String?,
     val sourceName: String,

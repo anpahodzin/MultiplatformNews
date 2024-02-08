@@ -1,4 +1,4 @@
-package org.example.kmpnews.helper
+package helper
 
 import di.dataModule
 import di.domainModule

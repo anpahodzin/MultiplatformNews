@@ -1,4 +1,4 @@
-package org.example.kmpnews.theme
+package theme
 
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CornerBasedShape

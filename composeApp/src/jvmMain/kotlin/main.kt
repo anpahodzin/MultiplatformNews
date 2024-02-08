@@ -6,8 +6,7 @@ import com.arkivanov.decompose.DefaultComponentContext
 import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.extensions.compose.lifecycle.LifecycleController
 import com.arkivanov.essenty.lifecycle.LifecycleRegistry
-import org.example.kmpnews.App
-import org.example.kmpnews.helper.initCommon
+import helper.initCommon
 import root.component.RootDefaultComponent
 import java.awt.Dimension
 

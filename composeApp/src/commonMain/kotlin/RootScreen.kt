@@ -1,11 +1,9 @@
-package org.example.kmpnews
-
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.extensions.compose.stack.Children
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
-import org.example.kmpnews.main.MainScreen
+import main.MainScreen
 import root.component.RootComponent
 
 @Composable

@@ -1,5 +1,6 @@
 package org.example.kmpnews
 
+import App
 import android.app.Application
 import android.graphics.Color
 import android.os.Bundle
@@ -8,7 +9,7 @@ import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.arkivanov.decompose.defaultComponentContext
-import org.example.kmpnews.helper.initCommon
+import helper.initCommon
 import root.component.RootDefaultComponent
 
 class AndroidApp : Application() {

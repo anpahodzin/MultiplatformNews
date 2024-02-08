@@ -1,4 +1,4 @@
-package org.example.kmpnews.main
+package main
 
 import androidx.compose.foundation.background
 import androidx.compose.runtime.Composable
@@ -7,8 +7,9 @@ import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.extensions.compose.stack.Children
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
 import main.component.MainComponent
-import org.example.kmpnews.news.list.NewsListScreen
-import org.example.kmpnews.theme.AppTheme
+import news.detailed.NewsDetailedScreen
+import news.list.NewsListScreen
+import theme.AppTheme
 
 @Composable
 fun MainScreen(
@@ -21,7 +22,8 @@ fun MainScreen(
         modifier = modifier.background(AppTheme.colors.background)
     ) {
         when (val child = it.instance) {
-            is MainComponent.Child.NewsList -> NewsListScreen(component = child.component)
+            is MainComponent.Child.NewsList -> NewsListScreen(child.component)
+            is MainComponent.Child.NewsDetailed -> NewsDetailedScreen(child.component)
         }
     }
 }

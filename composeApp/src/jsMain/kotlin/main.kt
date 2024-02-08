@@ -2,8 +2,7 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.window.CanvasBasedWindow
 import com.arkivanov.decompose.DefaultComponentContext
 import com.arkivanov.essenty.lifecycle.LifecycleRegistry
-import org.example.kmpnews.App
-import org.example.kmpnews.helper.initCommon
+import helper.initCommon
 import org.jetbrains.skiko.wasm.onWasmReady
 import root.component.RootDefaultComponent
 

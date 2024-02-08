@@ -1,4 +1,4 @@
-package org.example.kmpnews.theme
+package theme
 
 import androidx.compose.material.LocalContentColor
 import androidx.compose.material.MaterialTheme

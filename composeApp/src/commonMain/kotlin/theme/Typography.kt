@@ -1,4 +1,4 @@
-package org.example.kmpnews.theme
+package theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
