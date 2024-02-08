@@ -6,6 +6,7 @@ final class RootHolder {
   let root: RootComponent
   
   init() {
+    InitialHelperKt.doInitCommon()
     lifecycle = LifecycleRegistryKt.LifecycleRegistry()
     root = RootDefaultComponent(
       componentContext: DefaultComponentContext(lifecycle: lifecycle)
