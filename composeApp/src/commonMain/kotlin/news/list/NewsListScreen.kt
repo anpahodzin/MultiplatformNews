@@ -28,7 +28,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.seiko.imageloader.rememberImagePainter
+import coil3.compose.rememberAsyncImagePainter
 import extension.formatDDMMYYYY_HHMM
 import news.News
 import theme.AppColors
@@ -116,7 +116,7 @@ fun NewsCard(
 
         if (image != null) {
             Image(
-                painter = rememberImagePainter(image),
+                painter = rememberAsyncImagePainter(image),
                 contentDescription = "",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier

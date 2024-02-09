@@ -9,7 +9,7 @@ androidx-activityCompose = "1.8.2"
 compose-uitooling = "1.6.0"
 decompose = "3.0.0-alpha04"
 essenty = "2.0.0-alpha02"
-composeImageLoader = "1.7.4"
+coil = "3.0.0-alpha04"
 kermit = "2.0.2"
 buildConfig = "5.3.3"
 kotlinx-coroutines = "1.7.3"
@@ -34,7 +34,9 @@ compose-uiToolingPreview = { module = "androidx.compose.ui:ui-tooling-preview", 
 decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
 decompose-compose = { module = "com.arkivanov.decompose:extensions-compose", version.ref = "decompose" }
 essenty = { module = "com.arkivanov.essenty:lifecycle", version.ref = "essenty" }
-composeImageLoader = { module = "io.github.qdsfdhvh:image-loader", version.ref = "composeImageLoader" }
+coil = { module = "io.coil-kt.coil3:coil", version.ref = "coil" }
+coil-compose = { module ="io.coil-kt.coil3:coil-compose", version.ref = "coil" }
+coil-network = { module ="io.coil-kt.coil3:coil-network-ktor", version.ref = "coil" }
 kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }

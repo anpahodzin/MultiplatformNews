@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
@@ -24,8 +25,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import coil3.compose.rememberAsyncImagePainter
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
-import com.seiko.imageloader.rememberImagePainter
 import dev.icerock.moko.resources.compose.painterResource
 import dev.icerock.moko.resources.compose.stringResource
 import extension.formatDDMMYYYY_HHMM
@@ -66,6 +67,7 @@ fun NewsDetailedScreen(component: NewsDetailedComponent) {
 
         Column(
             modifier = Modifier
+                .wrapContentHeight()
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
                 .safeDrawingPadding()
@@ -75,7 +77,7 @@ fun NewsDetailedScreen(component: NewsDetailedComponent) {
             val image = news.urlToImage
             if (image != null) {
                 Image(
-                    painter = rememberImagePainter(image),
+                    painter = rememberAsyncImagePainter(image),
                     contentDescription = "",
                     contentScale = ContentScale.FillWidth,
                     modifier = Modifier
