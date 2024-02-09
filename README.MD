@@ -23,4 +23,5 @@ To run the application on iPhone device/simulator:
 
 ### Browser
 Run the browser application: `./gradlew :composeApp:jsBrowserDevelopmentRun`
+If you need to update Yarn: `./gradlew :kotlinUpgradeYarnLock`
 

@@ -31,6 +31,8 @@ class HttpClientProvider(
                 level = LogLevel.ALL
             }
             defaultRequest {
+//                Needed to bypass the CORS policy in JS
+//                header(HttpHeaders.ContentType, ContentType.Application.Json)
                 url {
                     url.takeFrom(endpoint)
                     defaultParameters.forEach {
