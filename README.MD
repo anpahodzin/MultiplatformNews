@@ -1,4 +1,5 @@
-# Compose Multiplatform Application
+# Multiplatform News 
+Generated using https://terrakok.github.io/Compose-Multiplatform-Wizard/
 
 ## Before running!
  - check your system with [KDoctor](https://github.com/Kotlin/kdoctor)

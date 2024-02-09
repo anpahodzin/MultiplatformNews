@@ -2,11 +2,11 @@
 
 kotlin = "1.9.22"
 compose = "1.6.0"
-compose-plugin = "1.6.0-beta01"
+compose-plugin = "1.6.0-beta02"
 agp = "8.2.2"
 androidx-appcompat = "1.6.1"
 androidx-activityCompose = "1.8.2"
-compose-uitooling = "1.6.0"
+compose-uitooling = "1.6.1"
 decompose = "3.0.0-alpha04"
 essenty = "2.0.0-alpha02"
 composeImageLoader = "1.7.4"
