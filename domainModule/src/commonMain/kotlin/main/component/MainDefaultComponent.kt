@@ -8,7 +8,7 @@ import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.router.stack.push
 import com.arkivanov.decompose.value.Value
 import kotlinx.serialization.Serializable
-import news.News
+import news.model.News
 import news.detailed.NewsDetailedDefaultComponent
 import news.list.NewsListDefaultComponent
 

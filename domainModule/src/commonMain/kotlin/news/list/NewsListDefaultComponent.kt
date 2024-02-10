@@ -4,7 +4,8 @@ import com.arkivanov.decompose.ComponentContext
 import core.flow.AnyStateFlow
 import core.flow.wrapToAny
 import core.getOrCreateViewModel
-import news.News
+import news.model.News
+import news.model.NewsCategory
 import org.koin.core.component.KoinComponent
 
 class NewsListDefaultComponent(
@@ -18,5 +19,9 @@ class NewsListDefaultComponent(
 
     override fun onNewsSelected(news: News) {
         onNewsSelected.invoke(news)
+    }
+
+    override fun onCategorySelected(category: NewsCategory) {
+        viewModel.onCategorySelected(category)
     }
 }

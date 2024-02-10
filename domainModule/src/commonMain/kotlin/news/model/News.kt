@@ -1,4 +1,4 @@
-package news
+package news.model
 
 import kotlinx.datetime.Instant
 import kotlinx.serialization.Serializable
@@ -13,5 +13,5 @@ data class News(
     val url: String,
     val urlToImage: String?,
     val publishedAt: Instant,
-    val content: String,
+    val content: String?,
 )

@@ -88,7 +88,7 @@ fun NewsDetailedScreen(component: NewsDetailedComponent) {
                 text = news.title,
                 style = AppTheme.typography.lightTitleHeaderText,
                 textDecoration = TextDecoration.Underline,
-                color = AppColors.dodgerBlue400,
+                color = AppColors.blueGray400,
                 modifier = Modifier.clickable { openUrl(news.url) }
             )
             Spacer(Modifier.height(AppTheme.sizes.small))

@@ -1,6 +1,6 @@
 package news.detailed
 
-import news.News
+import news.model.News
 
 sealed class NewsDetailedUiState {
     data object Loading : NewsDetailedUiState()

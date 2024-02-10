@@ -1,6 +1,8 @@
 package news
 
 import news.api.NewsApi
+import news.model.News
+import news.model.NewsCategory
 import news.model.toDomain
 
 internal class NewsDataRepository(
@@ -14,4 +16,10 @@ internal class NewsDataRepository(
             .toDomain()
             .also { cache.set(value = it) }
     }
+
+    override suspend fun getTopHeadlinesNews(category: NewsCategory): List<News> =
+        cache.get(key = category) ?: api
+            .getTopHeadlinesNews(category = category.name)
+            .toDomain()
+            .also { cache.set(key = category, value = it) }
 }

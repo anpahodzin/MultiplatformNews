@@ -3,7 +3,7 @@ package news.detailed
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.value.MutableValue
 import com.arkivanov.decompose.value.Value
-import news.News
+import news.model.News
 import org.koin.core.component.KoinComponent
 
 class NewsDetailedDefaultComponent(

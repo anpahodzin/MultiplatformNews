@@ -41,12 +41,12 @@ data class ColorPalette(
 
 fun lightColorPalette() = ColorPalette(
     // Material
-    primary = AppColors.breakerBay600,
-    primaryVariant = AppColors.breakerBay800,
-    secondary = AppColors.breakerBay600,
-    secondaryVariant = AppColors.breakerBay600,
+    primary = AppColors.dodgerBlue600,
+    primaryVariant = AppColors.dodgerBlue800,
+    secondary = AppColors.blueGray400,
+    secondaryVariant = AppColors.blueGray600,
     background = AppColors.blueGray50,
-    surface = AppColors.white,
+    surface = Color.White,
     error = Color(0xFFB00020),
     onPrimary = Color.White,
     onSecondary = Color.White,

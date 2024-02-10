@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -14,11 +15,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -32,7 +35,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.seiko.imageloader.rememberImagePainter
 import extension.formatDDMMYYYY_HHMM
-import news.News
+import news.model.News
 import theme.AppColors
 import theme.AppTheme
 
@@ -41,9 +44,25 @@ fun NewsListScreen(component: NewsListComponent) {
     val componentState by component.state.collectAsState()
     Box(modifier = Modifier.fillMaxSize()) {
         when (val state = componentState) {
-            is NewsListUiState.Data -> NewsListContent(state.newsList) { component.onNewsSelected(it) }
+            is NewsListUiState.Data -> {
+                NewsListContent(
+                    newsList = state.newsList,
+                    onNewsSelected = component::onNewsSelected,
+                )
+                NewsBottomBar(
+                    modifier = Modifier.align(Alignment.BottomStart).safeDrawingPadding(),
+                    selectedNewsCategory = state.selectedCategory,
+                    onCategoryClick = component::onCategorySelected
+                )
+            }
+
             NewsListUiState.Error -> {}
-            NewsListUiState.Loading -> {}
+            NewsListUiState.Loading -> {
+                CircularProgressIndicator(
+                    modifier = Modifier.align(Alignment.Center),
+                    color = AppTheme.colors.secondary
+                )
+            }
         }
     }
 }

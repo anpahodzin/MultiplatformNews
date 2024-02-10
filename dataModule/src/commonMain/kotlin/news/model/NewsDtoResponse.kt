@@ -2,7 +2,6 @@ package news.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import news.News
 
 @Serializable
 data class NewsDtoResponse(
