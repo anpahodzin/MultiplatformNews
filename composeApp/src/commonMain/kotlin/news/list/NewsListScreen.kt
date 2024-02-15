@@ -5,7 +5,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -20,7 +19,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -43,21 +44,28 @@ import theme.AppTheme
 fun NewsListScreen(component: NewsListComponent) {
     val componentState by component.state.collectAsState()
     Box(modifier = Modifier.fillMaxSize()) {
-        when (val state = componentState) {
-            is NewsListUiState.Data -> {
-                NewsListContent(
-                    newsList = state.newsList,
-                    onNewsSelected = component::onNewsSelected,
-                )
-                NewsBottomBar(
-                    modifier = Modifier.align(Alignment.BottomStart).safeDrawingPadding(),
-                    selectedNewsCategory = state.selectedCategory,
-                    onCategoryClick = component::onCategorySelected
-                )
+        componentState.getNewsOrNull()?.let { newsList ->
+            NewsListContent(
+                newsList = newsList,
+                onNewsSelected = component::onNewsSelected,
+                state = rememberLazyListState()
+            )
+        }
+        componentState.getCategoryOrNull()?.let { category ->
+            NewsBottomBar(
+                modifier = Modifier.align(Alignment.BottomStart).safeDrawingPadding(),
+                selectedNewsCategory = category,
+                onCategoryClick = component::onCategorySelected
+            )
+        }
+
+        when (componentState) {
+            is NewsListUiState.Data -> {}
+            is NewsListUiState.Error -> {
+                Text("Error")
             }
 
-            NewsListUiState.Error -> {}
-            NewsListUiState.Loading -> {
+            is NewsListUiState.Loading, NewsListUiState.Initial -> {
                 CircularProgressIndicator(
                     modifier = Modifier.align(Alignment.Center),
                     color = AppTheme.colors.secondary
@@ -70,12 +78,14 @@ fun NewsListScreen(component: NewsListComponent) {
 @Composable
 fun NewsListContent(
     newsList: List<News>,
-    onNewsSelected: (News) -> Unit
+    onNewsSelected: (News) -> Unit,
+    state: LazyListState,
 ) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = WindowInsets.safeDrawing.asPaddingValues(),
         horizontalAlignment = Alignment.CenterHorizontally,
+        state = state,
     ) {
         items(newsList, key = { item: News -> item.url }) {
             NewsCard(it, onNewsSelected)

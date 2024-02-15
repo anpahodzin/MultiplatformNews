@@ -2,40 +2,46 @@ package news.list
 
 import core.ComponentViewModel
 import core.runCatchingCancellable
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import news.NewsRepository
+import news.model.News
 import news.model.NewsCategory
 
 class NewsListViewModel(private val repository: NewsRepository) : ComponentViewModel() {
 
-    private val selectedCategories = MutableStateFlow(NewsCategory.Business)
+    private val selectedCategory = MutableStateFlow(NewsCategory.Business)
+    private val newsList = MutableStateFlow<List<News>?>(null)
 
-    @OptIn(ExperimentalCoroutinesApi::class)
-    val state: StateFlow<NewsListUiState> = selectedCategories
-        .flatMapLatest(::topHeadlinesNews)
-        .stateIn(this, SharingStarted.Eagerly, NewsListUiState.Loading)
+    private val _state =
+        MutableStateFlow<NewsListUiState>(NewsListUiState.Initial)
+    val state = _state.asStateFlow()
 
-    private fun topHeadlinesNews(category: NewsCategory): Flow<NewsListUiState> {
-        return flow {
-            emit(NewsListUiState.Loading)
+    init {
+        launch {
+            selectedCategory.collectLatest {
+                updateTopHeadlinesNews(category = it)
+            }
+        }
+    }
+
+    private fun updateTopHeadlinesNews(category: NewsCategory) {
+        launch {
+            _state.tryEmit(NewsListUiState.Loading(category))
             runCatchingCancellable {
                 repository.getTopHeadlinesNews(category)
             }.onSuccess {
-                emit(NewsListUiState.Data(it, category))
+                newsList.tryEmit(it)
+                _state.tryEmit(NewsListUiState.Data(category, it))
             }.onFailure {
-                emit(NewsListUiState.Error)
+                _state.tryEmit(NewsListUiState.Error(category))
             }
         }
     }
 
     fun onCategorySelected(category: NewsCategory) {
-        selectedCategories.tryEmit(category)
+        selectedCategory.tryEmit(category)
     }
 }

@@ -14,6 +14,7 @@ internal class NewsDataRepository(
         return cache.get() ?: api
             .getEverythingNews("tesla", 1, 20) //todo HARDCODED data
             .toDomain()
+            .filter { it.url != "https://removed.com" }
             .also { cache.set(value = it) }
     }
 
@@ -21,5 +22,6 @@ internal class NewsDataRepository(
         cache.get(key = category) ?: api
             .getTopHeadlinesNews(category = category.name)
             .toDomain()
+            .filter { it.url != "https://removed.com" }
             .also { cache.set(key = category, value = it) }
 }
