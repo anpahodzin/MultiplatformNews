@@ -18,4 +18,6 @@ data class AppSizes internal constructor(
     val elevationSmall: Dp = 2.dp,
     val elevationMedium: Dp = 4.dp,
     val elevationLarge: Dp = 8.dp,
+
+    val maxContentWidth: Dp = 700.dp
 )

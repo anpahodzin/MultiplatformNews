@@ -10,4 +10,6 @@ interface NewsListComponent {
     fun onNewsSelected(news: News)
 
     fun onCategorySelected(category: NewsCategory)
+
+    fun refresh()
 }

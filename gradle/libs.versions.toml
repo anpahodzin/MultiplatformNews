@@ -1,8 +1,7 @@
 [versions]
 
 kotlin = "1.9.22"
-compose = "1.6.0"
-compose-plugin = "1.6.0-beta02"
+compose = "1.6.0-rc01"
 agp = "8.2.2"
 androidx-appcompat = "1.6.1"
 androidx-activityCompose = "1.8.2"
@@ -62,7 +61,7 @@ moko-resources-compose = { module = "dev.icerock.moko:resources-compose", versio
 [plugins]
 
 multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
-compose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
+compose = { id = "org.jetbrains.compose", version.ref = "compose" }
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 buildConfig = { id = "com.github.gmazzo.buildconfig", version.ref = "buildConfig" }

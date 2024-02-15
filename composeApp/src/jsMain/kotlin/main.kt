@@ -13,7 +13,7 @@ fun main() {
     val lifecycle = LifecycleRegistry()
     val root = RootDefaultComponent(DefaultComponentContext(lifecycle))
     onWasmReady {
-        CanvasBasedWindow("KmpApp") {
+        CanvasBasedWindow("MultiplatformNews") {
             App(root)
         }
     }

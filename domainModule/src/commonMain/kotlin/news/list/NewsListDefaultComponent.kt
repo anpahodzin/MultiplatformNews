@@ -24,4 +24,8 @@ class NewsListDefaultComponent(
     override fun onCategorySelected(category: NewsCategory) {
         viewModel.onCategorySelected(category)
     }
+
+    override fun refresh() {
+        viewModel.refresh()
+    }
 }

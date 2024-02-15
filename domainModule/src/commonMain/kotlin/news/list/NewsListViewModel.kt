@@ -7,13 +7,11 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import news.NewsRepository
-import news.model.News
 import news.model.NewsCategory
 
 class NewsListViewModel(private val repository: NewsRepository) : ComponentViewModel() {
 
     private val selectedCategory = MutableStateFlow(NewsCategory.Business)
-    private val newsList = MutableStateFlow<List<News>?>(null)
 
     private val _state =
         MutableStateFlow<NewsListUiState>(NewsListUiState.Initial)
@@ -33,7 +31,6 @@ class NewsListViewModel(private val repository: NewsRepository) : ComponentViewM
             runCatchingCancellable {
                 repository.getTopHeadlinesNews(category)
             }.onSuccess {
-                newsList.tryEmit(it)
                 _state.tryEmit(NewsListUiState.Data(category, it))
             }.onFailure {
                 _state.tryEmit(NewsListUiState.Error(category))
@@ -43,5 +40,9 @@ class NewsListViewModel(private val repository: NewsRepository) : ComponentViewM
 
     fun onCategorySelected(category: NewsCategory) {
         selectedCategory.tryEmit(category)
+    }
+
+    fun refresh() {
+        updateTopHeadlinesNews(selectedCategory.value)
     }
 }
