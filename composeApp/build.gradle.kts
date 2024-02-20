@@ -1,4 +1,5 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+import org.jetbrains.kotlin.incremental.parsing.classesFqNames
 
 plugins {
     alias(libs.plugins.multiplatform)
@@ -68,6 +69,7 @@ kotlin {
                 implementation(libs.kotlinx.datetime)
                 implementation(libs.koin.core)
                 api(libs.moko.resources)
+//                implementation(libs.moko.resources.compose)
             }
         }
 
@@ -83,7 +85,7 @@ kotlin {
         }
 
         val jvmMain by getting {
-            dependsOn(commonMain)
+//            dependsOn(commonMain)
             dependencies {
                 implementation(compose.desktop.common)
                 implementation(compose.desktop.currentOs)
@@ -93,26 +95,26 @@ kotlin {
         }
 
         val jsMain by getting {
-            dependsOn(commonMain)
+//            dependsOn(commonMain)
             dependencies {
                 implementation(compose.html.core)
             }
         }
 
-        val iosX64Main by getting {
-            resources.srcDirs("build/generated/moko/iosX64Main/src")
-        }
-        val iosArm64Main by getting {
-            resources.srcDirs("build/generated/moko/iosArm64Main/src")
-        }
-        val iosSimulatorArm64Main by getting {
-            resources.srcDirs("build/generated/moko/iosSimulatorArm64Main/src")
-        }
+//        val iosX64Main by getting {
+//            resources.srcDirs("build/generated/moko/iosX64Main/src")
+//        }
+//        val iosArm64Main by getting {
+//            resources.srcDirs("build/generated/moko/iosArm64Main/src")
+//        }
+//        val iosSimulatorArm64Main by getting {
+//            resources.srcDirs("build/generated/moko/iosSimulatorArm64Main/src")
+//        }
         val iosMain by creating {
-            dependsOn(commonMain)
-            iosX64Main.dependsOn(this)
-            iosArm64Main.dependsOn(this)
-            iosSimulatorArm64Main.dependsOn(this)
+//            dependsOn(commonMain)
+//            iosX64Main.dependsOn(this)
+//            iosArm64Main.dependsOn(this)
+//            iosSimulatorArm64Main.dependsOn(this)
             dependencies {
                 api(projects.domainModule)
                 api(projects.dataModule)
@@ -168,6 +170,6 @@ compose.experimental {
 }
 
 multiplatformResources {
-    multiplatformResourcesPackage = "org.example.kmpnews" // required
-    multiplatformResourcesClassName = "MR" // optional, default MR
+    resourcesPackage.set("org.example.kmpnews")
+    resourcesClassName.set("MR")
 }
