@@ -10,5 +10,6 @@ data class NewsDtoResponse(
     @SerialName("articles") val articles: List<NewsDto>
 )
 
-fun NewsDtoResponse.toDomain(): List<News> =
-    articles.map { it.toDomain() }
+fun NewsDtoResponse.toDomain(): List<News> = articles
+    .map { it.toDomain() }
+    .filter { it.url != "https://removed.com" }

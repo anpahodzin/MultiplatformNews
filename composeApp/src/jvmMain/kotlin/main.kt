@@ -7,14 +7,14 @@ import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.extensions.compose.lifecycle.LifecycleController
 import com.arkivanov.essenty.lifecycle.LifecycleRegistry
 import dev.icerock.moko.resources.compose.stringResource
-import helper.initCommon
+import di.initKoin
 import org.example.kmpnews.MR
 import root.component.RootDefaultComponent
 import java.awt.Dimension
 
 @OptIn(ExperimentalDecomposeApi::class)
 fun main() {
-    initCommon()
+    initKoin()
     val lifecycle = LifecycleRegistry()
     val root = RootDefaultComponent(DefaultComponentContext(lifecycle))
     application {
