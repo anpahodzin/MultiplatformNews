@@ -32,12 +32,11 @@ import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.sp
-import co.touchlab.kermit.Logger
-import dev.icerock.moko.resources.compose.stringResource
 import extension.pxToDp
+import multiplatformnews.composeapp.generated.resources.Res
 import news.model.News
 import news.model.NewsCategory
-import org.example.kmpnews.MR
+import org.jetbrains.compose.resources.stringResource
 import theme.AppTheme
 
 @Composable
@@ -81,7 +80,7 @@ fun NewsListScreen(component: NewsListComponent) {
                     modifier = Modifier.align(Alignment.Center),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Text(stringResource(MR.strings.something_went_wrong), fontSize = 20.sp)
+                    Text(stringResource(Res.string.something_went_wrong), fontSize = 20.sp)
                     Text(
                         modifier = Modifier
                             .padding(AppTheme.sizes.medium)
@@ -89,7 +88,7 @@ fun NewsListScreen(component: NewsListComponent) {
                             .background(AppTheme.colors.primary)
                             .clickable { component.refresh() }
                             .padding(AppTheme.sizes.medium),
-                        text = stringResource(MR.strings.try_again),
+                        text = stringResource(Res.string.try_again),
                         fontSize = 20.sp,
                         color = AppTheme.colors.onPrimary
                     )

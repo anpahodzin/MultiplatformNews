@@ -6,9 +6,9 @@ import com.arkivanov.decompose.DefaultComponentContext
 import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.extensions.compose.lifecycle.LifecycleController
 import com.arkivanov.essenty.lifecycle.LifecycleRegistry
-import dev.icerock.moko.resources.compose.stringResource
 import helper.initCommon
-import org.example.kmpnews.MR
+import multiplatformnews.composeapp.generated.resources.Res
+import org.jetbrains.compose.resources.stringResource
 import root.component.RootDefaultComponent
 import java.awt.Dimension
 
@@ -24,7 +24,7 @@ fun main() {
         Window(
             onCloseRequest = ::exitApplication,
             state = windowState,
-            title = stringResource(MR.strings.app_name)
+            title = stringResource(Res.string.app_name)
         ) {
             window.minimumSize = Dimension(400, 600)
             App(root)

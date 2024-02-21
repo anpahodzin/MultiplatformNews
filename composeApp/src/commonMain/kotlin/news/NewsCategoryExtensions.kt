@@ -1,18 +1,18 @@
 package news
 
 import androidx.compose.runtime.Composable
-import dev.icerock.moko.resources.compose.stringResource
+import multiplatformnews.composeapp.generated.resources.Res
 import news.model.NewsCategory
-import org.example.kmpnews.MR
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun NewsCategory.toLocalizedString(): String =
     when (this) {
-        NewsCategory.Business -> stringResource(MR.strings.business)
-        NewsCategory.Entertainment -> stringResource(MR.strings.entertainment)
-        NewsCategory.General -> stringResource(MR.strings.general)
-        NewsCategory.Health -> stringResource(MR.strings.health)
-        NewsCategory.Science -> stringResource(MR.strings.science)
-        NewsCategory.Sports -> stringResource(MR.strings.sports)
-        NewsCategory.Technology -> stringResource(MR.strings.technology)
+        NewsCategory.Business -> stringResource(Res.string.business)
+        NewsCategory.Entertainment -> stringResource(Res.string.entertainment)
+        NewsCategory.General -> stringResource(Res.string.general)
+        NewsCategory.Health -> stringResource(Res.string.health)
+        NewsCategory.Science -> stringResource(Res.string.science)
+        NewsCategory.Sports -> stringResource(Res.string.sports)
+        NewsCategory.Technology -> stringResource(Res.string.technology)
     }

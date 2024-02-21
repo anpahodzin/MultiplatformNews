@@ -51,7 +51,7 @@ kotlin {
             dependencies {
                 implementation(projects.domainModule)
                 implementation(projects.dataModule)
-                implementation(projects.mokoResourcesCompose)
+//                implementation(projects.mokoResourcesCompose)
 
                 implementation(compose.runtime)
                 implementation(compose.material)
