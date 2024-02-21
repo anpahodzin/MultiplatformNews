@@ -18,7 +18,6 @@ kotlinx-datetime = "0.5.0"
 multiplatformSettings = "1.1.1"
 koin = "3.5.3"
 sqlDelight = "2.0.1"
-mokoResources = "0.23.0"
 
 android-compileSdk = "34"
 android-minSdk = "24"
@@ -55,8 +54,6 @@ sqlDelight-driver-sqlite = { module = "app.cash.sqldelight:sqlite-driver", versi
 sqlDelight-driver-android = { module = "app.cash.sqldelight:android-driver", version.ref = "sqlDelight" }
 sqlDelight-driver-native = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelight" }
 sqlDelight-driver-js = { module = "app.cash.sqldelight:web-worker-driver", version.ref = "sqlDelight" }
-moko-resources = { module = "dev.icerock.moko:resources", version.ref = "mokoResources" }
-moko-resources-compose = { module = "dev.icerock.moko:resources-compose", version.ref = "mokoResources" }
 
 [plugins]
 
@@ -67,4 +64,3 @@ androidLibrary = { id = "com.android.library", version.ref = "agp" }
 buildConfig = { id = "com.github.gmazzo.buildconfig", version.ref = "buildConfig" }
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 sqlDelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }
-moko-resources-plugin = { id = "dev.icerock.moko:resources-generator", version.ref = "mokoResources" }
