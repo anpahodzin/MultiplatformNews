@@ -10,6 +10,7 @@ decompose = "3.0.0-alpha04"
 essenty = "2.0.0-alpha02"
 composeImageLoader = "1.7.4"
 kermit = "2.0.2"
+napier = "2.6.1"
 buildConfig = "5.3.3"
 kotlinx-coroutines = "1.7.3"
 ktor = "2.3.8"
@@ -17,7 +18,7 @@ kotlinx-serialization = "1.6.2"
 kotlinx-datetime = "0.5.0"
 multiplatformSettings = "1.1.1"
 koin = "3.5.3"
-sqlDelight = "2.0.1"
+sqlDelight = "2.0.0-alpha05"
 mokoResources = "0.23.0"
 
 android-compileSdk = "34"
@@ -35,6 +36,7 @@ decompose-compose = { module = "com.arkivanov.decompose:extensions-compose", ver
 essenty = { module = "com.arkivanov.essenty:lifecycle", version.ref = "essenty" }
 composeImageLoader = { module = "io.github.qdsfdhvh:image-loader", version.ref = "composeImageLoader" }
 kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
+napier = { module = "io.github.aakira:napier", version.ref = "napier" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-swing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
@@ -56,7 +58,7 @@ sqlDelight-coroutines = { module = "app.cash.sqldelight:coroutines-extensions", 
 sqlDelight-driver-sqlite = { module = "app.cash.sqldelight:sqlite-driver", version.ref = "sqlDelight" }
 sqlDelight-driver-android = { module = "app.cash.sqldelight:android-driver", version.ref = "sqlDelight" }
 sqlDelight-driver-native = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelight" }
-sqlDelight-driver-js = { module = "app.cash.sqldelight:web-worker-driver", version.ref = "sqlDelight" }
+sqlDelight-driver-js = { module = "app.cash.sqldelight:sqljs-driver", version.ref = "sqlDelight" }
 moko-resources = { module = "dev.icerock.moko:resources", version.ref = "mokoResources" }
 moko-resources-compose = { module = "dev.icerock.moko:resources-compose", version.ref = "mokoResources" }
 

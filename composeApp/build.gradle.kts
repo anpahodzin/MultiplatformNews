@@ -97,9 +97,7 @@ kotlin {
             dependsOn(commonMain)
             dependencies {
                 implementation(compose.html.core)
-                implementation(npm("@cashapp/sqldelight-sqljs-worker", "2.0.1"))
                 implementation(npm("sql.js", "1.8.0"))
-                implementation(devNpm("copy-webpack-plugin", "9.1.0"))
             }
         }
 

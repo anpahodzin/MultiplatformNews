@@ -62,9 +62,7 @@ kotlin {
         jsMain.dependencies {
             implementation(libs.ktor.client.js)
             implementation(libs.sqlDelight.driver.js)
-//            implementation(npm("@cashapp/sqldelight-sqljs-worker", "2.0.1"))
-//            implementation(npm("sql.js", "1.8.0"))
-//            implementation(devNpm("copy-webpack-plugin", "9.1.0"))
+            implementation("co.touchlab:stately-common:2.0.5")
         }
 
         iosMain.dependencies {

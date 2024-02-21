@@ -32,7 +32,6 @@ import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.sp
-import co.touchlab.kermit.Logger
 import dev.icerock.moko.resources.compose.stringResource
 import extension.pxToDp
 import news.model.News
