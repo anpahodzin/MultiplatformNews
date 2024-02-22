@@ -9,9 +9,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import dev.icerock.moko.resources.compose.painterResource
-import dev.icerock.moko.resources.compose.stringResource
-import org.example.kmpnews.MR
+import multiplatformnews.composeapp.generated.resources.Res
+import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 import theme.AppTheme
 
 @Composable
@@ -26,7 +26,7 @@ fun ButtonBack(
             .clickable(onClick = onClick)
             .background(AppTheme.colors.surface)
             .padding(AppTheme.sizes.small),
-        painter = painterResource(MR.images.ic_back),
-        contentDescription = stringResource(MR.strings.back)
+        painter = painterResource(Res.drawable.ic_arrow_back_24),
+        contentDescription = stringResource(Res.string.back)
     )
 }

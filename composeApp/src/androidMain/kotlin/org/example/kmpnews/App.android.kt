@@ -9,7 +9,8 @@ import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.arkivanov.decompose.defaultComponentContext
-import helper.initCommon
+import di.initKoin
+import org.koin.android.ext.koin.androidContext
 import root.component.RootDefaultComponent
 
 class AndroidApp : Application() {
@@ -20,7 +21,9 @@ class AndroidApp : Application() {
     override fun onCreate() {
         super.onCreate()
         INSTANCE = this
-        initCommon()
+        initKoin {
+            androidContext(this@AndroidApp)
+        }
     }
 }
 

@@ -6,15 +6,15 @@ import com.arkivanov.decompose.DefaultComponentContext
 import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.extensions.compose.lifecycle.LifecycleController
 import com.arkivanov.essenty.lifecycle.LifecycleRegistry
-import dev.icerock.moko.resources.compose.stringResource
-import helper.initCommon
-import org.example.kmpnews.MR
+import di.initKoin
+import multiplatformnews.composeapp.generated.resources.Res
+import org.jetbrains.compose.resources.stringResource
 import root.component.RootDefaultComponent
 import java.awt.Dimension
 
 @OptIn(ExperimentalDecomposeApi::class)
 fun main() {
-    initCommon()
+    initKoin()
     val lifecycle = LifecycleRegistry()
     val root = RootDefaultComponent(DefaultComponentContext(lifecycle))
     application {
@@ -24,7 +24,7 @@ fun main() {
         Window(
             onCloseRequest = ::exitApplication,
             state = windowState,
-            title = stringResource(MR.strings.app_name)
+            title = stringResource(Res.string.app_name)
         ) {
             window.minimumSize = Dimension(400, 600)
             App(root)
