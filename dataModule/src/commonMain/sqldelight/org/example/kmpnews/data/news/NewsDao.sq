@@ -1,0 +1,27 @@
+import kotlinx.datetime.Instant;
+
+CREATE TABLE NewsEntity (
+--     id TEXT NOT NULL PRIMARY KEY,
+    sourceName TEXT NOT NULL,
+    author TEXT,
+    title TEXT NOT NULL,
+    description TEXT,
+    url TEXT NOT NULL PRIMARY KEY,
+    urlToImage TEXT,
+    publishedAt INTEGER AS Instant NOT NULL,
+    content TEXT
+);
+
+insertFavorite:
+INSERT OR REPLACE INTO
+NewsEntity(sourceName, author, title, description, url, urlToImage, publishedAt, content)
+VALUES (?,?,?,?,?,?,?,?);
+
+getAllFavorite:
+SELECT * FROM NewsEntity;
+
+deleteFavorite:
+DELETE FROM NewsEntity WHERE url = :url;
+
+deleteAll:
+DELETE FROM NewsEntity;

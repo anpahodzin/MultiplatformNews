@@ -6,7 +6,7 @@ import com.arkivanov.decompose.DefaultComponentContext
 import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.extensions.compose.lifecycle.LifecycleController
 import com.arkivanov.essenty.lifecycle.LifecycleRegistry
-import helper.initCommon
+import di.initKoin
 import multiplatformnews.composeapp.generated.resources.Res
 import org.jetbrains.compose.resources.stringResource
 import root.component.RootDefaultComponent
@@ -14,7 +14,7 @@ import java.awt.Dimension
 
 @OptIn(ExperimentalDecomposeApi::class)
 fun main() {
-    initCommon()
+    initKoin()
     val lifecycle = LifecycleRegistry()
     val root = RootDefaultComponent(DefaultComponentContext(lifecycle))
     application {
