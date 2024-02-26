@@ -43,7 +43,7 @@ class NewsTabsDefaultComponent(
             TabConfig.NewsFavorite -> NewsTabsComponent.TabChild.NewsFavorite(
                 NewsFavoriteDefaultComponent(
                     componentContext = componentContext,
-                    onFavoriteNewsSelected = onNewsSelected,
+                    onNewsSelected = onNewsSelected,
                 )
             )
         }

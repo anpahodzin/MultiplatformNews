@@ -1,9 +1,10 @@
 package news.favorite
 
 import core.ComponentViewModel
-import core.runCatchingCancellable
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import news.NewsRepository
 
@@ -14,19 +15,15 @@ class NewsFavoriteViewModel(private val repository: NewsRepository) : ComponentV
     val state = _state.asStateFlow()
 
     init {
-        getFavoriteNews()
+        subscribeFavoriteNews()
     }
 
-    private fun getFavoriteNews() {
+    private fun subscribeFavoriteNews() {
         launch {
             _state.tryEmit(NewsFavoriteUiState.Loading)
-            runCatchingCancellable {
-                repository.getFavoriteNews()
-            }.onSuccess {
-                _state.tryEmit(NewsFavoriteUiState.Data(it))
-            }.onFailure {
-                _state.tryEmit(NewsFavoriteUiState.Error)
-            }
+            repository.flowFavoriteNews()
+                .catch { _state.tryEmit(NewsFavoriteUiState.Error) }
+                .collectLatest { _state.tryEmit(NewsFavoriteUiState.Data(it)) }
         }
     }
 }

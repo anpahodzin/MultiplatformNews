@@ -7,5 +7,8 @@ sealed class NewsDetailedUiState {
 
     data object Error : NewsDetailedUiState()
 
-    data class Data(val newsList: List<News>) : NewsDetailedUiState()
+    data class Data(
+        val news: News,
+        val isFavoriteNews: Boolean
+    ) : NewsDetailedUiState()
 }

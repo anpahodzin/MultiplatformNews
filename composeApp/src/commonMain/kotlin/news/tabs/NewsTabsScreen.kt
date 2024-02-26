@@ -65,7 +65,7 @@ fun NewsTabsScreen(
             pages = childPages,
             onPageSelected = component::selectPage,
             scrollAnimation = PagesScrollAnimation.Default,
-//            pager = defaultHorizontalPager(userScrollEnabled = true),
+//            pager = defaultHorizontalPager(userScrollEnabled = true),todo
         ) { _, page ->
             when (page) {
                 is NewsTabsComponent.TabChild.NewsList -> NewsListScreen(
@@ -73,7 +73,10 @@ fun NewsTabsScreen(
                     bottomPadding = bottomBarSize.height.pxToDp()
                 )
 
-                is NewsTabsComponent.TabChild.NewsFavorite -> NewsFavoriteScreen(page.component)
+                is NewsTabsComponent.TabChild.NewsFavorite -> NewsFavoriteScreen(
+                    component = page.component,
+                    bottomPadding = bottomBarSize.height.pxToDp()
+                )
             }
         }
 

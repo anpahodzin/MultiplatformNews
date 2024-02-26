@@ -9,11 +9,14 @@ import org.koin.core.component.KoinComponent
 
 class NewsFavoriteDefaultComponent(
     private val componentContext: ComponentContext,
-    private val onFavoriteNewsSelected: (news: News) -> Unit,
+    private val onNewsSelected: (news: News) -> Unit,
 ) : NewsFavoriteComponent, ComponentContext by componentContext, KoinComponent {
 
     private val viewModel: NewsFavoriteViewModel = getOrCreateViewModel()
 
     override val state: AnyStateFlow<NewsFavoriteUiState> = viewModel.state.wrapToAny()
 
+    override fun onNewsSelected(news: News) {
+        onNewsSelected.invoke(news)
+    }
 }

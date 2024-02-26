@@ -1,10 +1,13 @@
 package news.detailed
 
-import com.arkivanov.decompose.value.Value
-import news.model.News
+import core.flow.AnyStateFlow
+import kotlinx.coroutines.flow.Flow
 
 interface NewsDetailedComponent {
-    val state: Value<News>
+    val state: AnyStateFlow<NewsDetailedUiState>
+    val eventChannel: Flow<NewsDetailedUiEvent>
 
     fun onBackPressed()
+
+    fun onFavoritePressed()
 }

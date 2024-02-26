@@ -32,7 +32,7 @@ internal class NewsDataRepository(
             .toDomain()
             .also { cache.set(key = category, value = it) }
 
-    override suspend fun addNewsToFavourite(news: News) = with(news) {
+    private suspend fun addNewsToFavourite(news: News) = with(news) {
         database().insertFavorite(
             sourceName = sourceName,
             author = author,
@@ -45,18 +45,28 @@ internal class NewsDataRepository(
         )
     }
 
-    override suspend fun deleteNewsFromFavourite(news: News) = with(news) {
+    private suspend fun deleteNewsFromFavourite(news: News) = with(news) {
         database().deleteFavorite(url = url)
     }
+
+    override suspend fun addOrDeleteFavoriteNews(news: News): Boolean {
+        return database().transactionWithResult {
+            if (isFavouriteNews(news)) {
+                deleteNewsFromFavourite(news)
+                false
+            } else {
+                addNewsToFavourite(news)
+                true
+            }
+        }
+    }
+
+    override suspend fun isFavouriteNews(news: News): Boolean =
+        database().isExist(news.url).executeAsOne()
 
     override suspend fun flowFavoriteNews(): Flow<List<News>> =
         database().getAllFavorite()
             .asFlow()
             .mapToList(Dispatchers.Default)
-            .map { it.toDomain() }
-
-    override suspend fun getFavoriteNews(): List<News> =
-        database().getAllFavorite()
-            .awaitAsList()
             .map { it.toDomain() }
 }
