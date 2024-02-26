@@ -18,7 +18,7 @@ import news.toLocalizedString
 import theme.AppTheme
 
 @Composable
-fun NewsBottomBar(
+fun NewsCategoryBar(
     modifier: Modifier = Modifier,
     selectedNewsCategory: NewsCategory,
     onCategoryClick: (NewsCategory) -> Unit,
@@ -38,7 +38,7 @@ fun NewsBottomBar(
 }
 
 @Composable
-fun CategoryButton(
+private fun CategoryButton(
     modifier: Modifier = Modifier,
     title: String,
     isSelected: Boolean,

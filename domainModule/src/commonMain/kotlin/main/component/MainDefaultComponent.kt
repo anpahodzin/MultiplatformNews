@@ -8,9 +8,9 @@ import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.router.stack.push
 import com.arkivanov.decompose.value.Value
 import kotlinx.serialization.Serializable
-import news.model.News
 import news.detailed.NewsDetailedDefaultComponent
-import news.list.NewsListDefaultComponent
+import news.model.News
+import news.tabs.NewsTabsDefaultComponent
 
 class MainDefaultComponent(
     componentContext: ComponentContext
@@ -21,12 +21,12 @@ class MainDefaultComponent(
     override val childStack: Value<ChildStack<*, MainComponent.Child>> = childStack(
         source = navigation,
         serializer = Config.serializer(),
-        initialStack = { listOf(Config.NewsList) },
+        initialStack = { listOf(Config.NewsTabs) },
         handleBackButton = true,
     ) { config: Config, componentContext: ComponentContext ->
         when (config) {
-            is Config.NewsList -> MainComponent.Child.NewsList(
-                NewsListDefaultComponent(
+            is Config.NewsTabs -> MainComponent.Child.NewsTabs(
+                NewsTabsDefaultComponent(
                     componentContext = componentContext,
                     onNewsSelected = { news -> navigation.push(Config.NewsDetailed(news)) }
                 )
@@ -47,7 +47,7 @@ class MainDefaultComponent(
     @Serializable
     private sealed interface Config {
         @Serializable
-        data object NewsList : Config
+        data object NewsTabs : Config
 
         @Serializable
         data class NewsDetailed(val news: News) : Config

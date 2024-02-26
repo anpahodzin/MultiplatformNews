@@ -1,5 +1,6 @@
 package news
 
+import app.cash.sqldelight.async.coroutines.awaitAsList
 import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
 import kotlinx.coroutines.Dispatchers
@@ -54,4 +55,8 @@ internal class NewsDataRepository(
             .mapToList(Dispatchers.Default)
             .map { it.toDomain() }
 
+    override suspend fun getFavoriteNews(): List<News> =
+        database().getAllFavorite()
+            .awaitAsList()
+            .map { it.toDomain() }
 }

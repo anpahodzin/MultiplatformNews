@@ -9,5 +9,6 @@ interface NewsRepository {
     suspend fun getTopHeadlinesNews(category: NewsCategory): List<News>
     suspend fun addNewsToFavourite(news: News)
     suspend fun deleteNewsFromFavourite(news: News)
+    suspend fun getFavoriteNews(): List<News>
     suspend fun flowFavoriteNews(): Flow<List<News>>
 }

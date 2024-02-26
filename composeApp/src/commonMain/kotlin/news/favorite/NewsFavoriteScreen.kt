@@ -1,4 +1,4 @@
-package news.list
+package news.favorite
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.widthIn
@@ -18,7 +19,6 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -27,57 +27,34 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.sp
 import extension.pxToDp
 import multiplatformnews.composeapp.generated.resources.Res
+import news.list.NewsCard
 import news.model.News
-import news.model.NewsCategory
 import org.jetbrains.compose.resources.stringResource
 import theme.AppTheme
 
 @Composable
-fun NewsListScreen(
-    component: NewsListComponent,
-    bottomPadding: Dp
-) {
+fun NewsFavoriteScreen(component: NewsFavoriteComponent) {
     val componentState by component.state.collectAsState()
     Box(modifier = Modifier.fillMaxSize()) {
-        var categoryBarSize by remember { mutableStateOf(IntSize.Zero) }
+        var bottomBarSize by remember { mutableStateOf(IntSize.Zero) }
         val lazyListState = rememberLazyListState()
 
-        componentState.getCategoryOrNull()?.let { category ->
-
-            componentState.getNewsOrNull()?.let { newsList ->
-                NewsListContent(
-                    newsList = newsList,
-                    category = category,
-                    onNewsSelected = component::onNewsSelected,
-                    bottomPadding = categoryBarSize.height.pxToDp() + bottomPadding,
+        when (val state = componentState) {
+            is NewsFavoriteUiState.Data -> {
+                NewsFavoriteListContent(
+                    newsList = state.favoriteNews,
+                    onNewsSelected = {},
+                    bottomPadding = bottomBarSize.height.pxToDp(),
                     lazyListState = lazyListState
                 )
             }
 
-            NewsCategoryBar(
-                modifier = Modifier
-                    .align(Alignment.BottomStart)
-                    .padding(bottom = bottomPadding + AppTheme.sizes.small)
-                    .onSizeChanged { categoryBarSize = it },
-                selectedNewsCategory = category,
-                onCategoryClick = component::onCategorySelected
-            )
-        }
-
-        when (val state = componentState) {
-            is NewsListUiState.Data -> {
-                LaunchedEffect(state) {
-                    lazyListState.scrollToItem(0)
-                }
-            }
-
-            is NewsListUiState.Error -> {
+            is NewsFavoriteUiState.Error -> {
                 Column(
                     modifier = Modifier.align(Alignment.Center),
                     horizontalAlignment = Alignment.CenterHorizontally
@@ -88,7 +65,7 @@ fun NewsListScreen(
                             .padding(AppTheme.sizes.medium)
                             .clip(AppTheme.shapes.circle)
                             .background(AppTheme.colors.primary)
-                            .clickable { component.refresh() }
+                            .clickable { /*component.refresh() */ }
                             .padding(AppTheme.sizes.medium),
                         text = stringResource(Res.string.try_again),
                         fontSize = 20.sp,
@@ -97,7 +74,7 @@ fun NewsListScreen(
                 }
             }
 
-            is NewsListUiState.Loading, NewsListUiState.Initial -> {
+            is NewsFavoriteUiState.Loading, NewsFavoriteUiState.Initial -> {
                 CircularProgressIndicator(
                     modifier = Modifier.align(Alignment.Center),
                     color = AppTheme.colors.secondary
@@ -108,9 +85,8 @@ fun NewsListScreen(
 }
 
 @Composable
-private fun NewsListContent(
+private fun NewsFavoriteListContent(
     newsList: List<News>,
-    category: NewsCategory,
     onNewsSelected: (News) -> Unit,
     bottomPadding: Dp,
     lazyListState: LazyListState = rememberLazyListState(),
@@ -126,10 +102,12 @@ private fun NewsListContent(
         horizontalAlignment = Alignment.CenterHorizontally,
         state = lazyListState,
     ) {
-        item(key = category) {
-            NewsListHeader(
-                modifier = Modifier.widthIn(max = maxContentWidth),
-                category = category
+        item {
+            Text(
+                text = stringResource(Res.string.favorite),
+                modifier = Modifier.fillMaxWidth(),
+                style = AppTheme.typography.lightTitleHeaderText,
+                fontSize = 40.sp
             )
         }
         items(newsList, key = { item: News -> item.url }) {

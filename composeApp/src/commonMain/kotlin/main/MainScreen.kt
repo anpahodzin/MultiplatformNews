@@ -8,7 +8,7 @@ import com.arkivanov.decompose.extensions.compose.stack.Children
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
 import main.component.MainComponent
 import news.detailed.NewsDetailedScreen
-import news.list.NewsListScreen
+import news.tabs.NewsTabsScreen
 import theme.AppTheme
 
 @Composable
@@ -22,7 +22,7 @@ fun MainScreen(
         modifier = modifier.background(AppTheme.colors.background)
     ) {
         when (val child = it.instance) {
-            is MainComponent.Child.NewsList -> NewsListScreen(child.component)
+            is MainComponent.Child.NewsTabs -> NewsTabsScreen(child.component)
             is MainComponent.Child.NewsDetailed -> NewsDetailedScreen(child.component)
         }
     }
