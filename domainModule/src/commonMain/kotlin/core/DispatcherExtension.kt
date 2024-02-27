@@ -8,7 +8,7 @@ import kotlin.concurrent.Volatile
 private var isImmediateSupported: Boolean = true
 
 @Suppress("UnusedReceiverParameter")
-internal val MainCoroutineDispatcher.immediateOrFallback: MainCoroutineDispatcher
+val MainCoroutineDispatcher.immediateOrFallback: MainCoroutineDispatcher
     get() {
         if (isImmediateSupported) {
             try {
