@@ -20,6 +20,7 @@ data class ColorPalette(
     val isLight: Boolean,
     //  Other
     val bottomBarColor: Color,
+    val snackbarBackground: Color,
 ) {
     val materialColors
         get() = Colors(
@@ -55,7 +56,8 @@ fun lightColorPalette() = ColorPalette(
     onError = Color.White,
     isLight = true,
     //  Other
-    bottomBarColor = AppColors.blueGray400
+    bottomBarColor = AppColors.blueGray400,
+    snackbarBackground = AppColors.dodgerBlue600,
 )
 
 fun darkColorPalette() = lightColorPalette().copy(
@@ -74,5 +76,6 @@ fun darkColorPalette() = lightColorPalette().copy(
     onError = Color.Black,
     isLight = false,
     //  Other
-    bottomBarColor = AppColors.blueGray800
+    bottomBarColor = AppColors.blueGray800,
+    snackbarBackground = AppColors.dodgerBlue600,
 )

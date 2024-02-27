@@ -7,11 +7,14 @@ import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.SnackbarHost
+import androidx.compose.material.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -19,11 +22,18 @@ import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.unit.IntSize
 import extension.collectSideEffect
 import extension.pxToDp
+import kotlinx.coroutines.launch
+import news.detailed.mapper.toMessage
 import theme.AppTheme
+import view.CustomSnackbar
 
 @Composable
 fun NewsDetailedScreen(component: NewsDetailedComponent) {
     val componentState by component.state.collectAsState()
+
+    val snackbarHostState = remember { SnackbarHostState() }
+    val coroutineScope = rememberCoroutineScope()
+
     when (val state = componentState) {
         is NewsDetailedUiState.Data -> {
             Box(modifier = Modifier.fillMaxSize()) {
@@ -49,6 +59,14 @@ fun NewsDetailedScreen(component: NewsDetailedComponent) {
                         .widthIn(max = AppTheme.sizes.maxContentWidth),
                     news = state.news,
                 )
+
+                SnackbarHost(
+                    hostState = snackbarHostState,
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .safeDrawingPadding(),
+                    snackbar = { CustomSnackbar(it) }
+                )
             }
         }
 
@@ -57,14 +75,9 @@ fun NewsDetailedScreen(component: NewsDetailedComponent) {
     }
 
     component.eventChannel.collectSideEffect { event ->
-        when (event) {
-            NewsDetailedUiEvent.AddedFavoriteNews -> {
-                //todo
-            }
-
-            NewsDetailedUiEvent.RemovedFavoriteNews -> {
-                //todo
-            }
+        snackbarHostState.currentSnackbarData?.dismiss()
+        coroutineScope.launch {
+            snackbarHostState.showSnackbar(message = event.toMessage())
         }
     }
 }
