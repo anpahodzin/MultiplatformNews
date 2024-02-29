@@ -20,3 +20,4 @@ dependencyResolutionManagement {
 include(":composeApp")
 include(":domainModule")
 include(":dataModule")
+include(":sample-web")
