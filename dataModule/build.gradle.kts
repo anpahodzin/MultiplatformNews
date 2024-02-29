@@ -62,9 +62,9 @@ kotlin {
         jsMain.dependencies {
             implementation(libs.ktor.client.js)
             implementation(libs.sqlDelight.driver.js)
-//            implementation(npm("@cashapp/sqldelight-sqljs-worker", "2.0.1"))
-//            implementation(npm("sql.js", "1.8.0"))
-//            implementation(devNpm("copy-webpack-plugin", "9.1.0"))
+            implementation(npm("@cashapp/sqldelight-sqljs-worker", libs.versions.sqlDelight.get()))
+            implementation(npm("sql.js", "1.8.0"))
+            implementation(devNpm("copy-webpack-plugin", "9.1.0"))
         }
 
         iosMain.dependencies {
@@ -96,10 +96,8 @@ buildConfig {
 sqldelight {
     databases {
         create("MyDatabase") {
-            // Database configuration here.
-            // https://cashapp.github.io/sqldelight
             packageName.set("org.example.kmpnews")
-            generateAsync = true
+            generateAsync.set(true)
         }
     }
 }

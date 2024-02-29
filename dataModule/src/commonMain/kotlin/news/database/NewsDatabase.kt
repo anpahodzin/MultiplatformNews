@@ -6,5 +6,5 @@ import org.example.kmpnews.data.news.NewsDaoQueries
 
 class NewsDatabase(initializer: DatabaseInitializer) : DBProvider<NewsDaoQueries>(initializer) {
 
-    override suspend fun getQueries(initializer: DatabaseInitializer) = initializer().newsDaoQueries
+    override suspend fun getDao(initializer: DatabaseInitializer) = initializer().newsDaoQueries
 }

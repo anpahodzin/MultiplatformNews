@@ -1,6 +1,6 @@
 package news
 
-import app.cash.sqldelight.async.coroutines.awaitAsList
+import app.cash.sqldelight.async.coroutines.awaitAsOne
 import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
 import kotlinx.coroutines.Dispatchers
@@ -62,7 +62,7 @@ internal class NewsDataRepository(
     }
 
     override suspend fun isFavouriteNews(news: News): Boolean =
-        database().isExist(news.url).executeAsOne()
+        database().isExist(news.url).awaitAsOne()
 
     override suspend fun flowFavoriteNews(): Flow<List<News>> =
         database().getAllFavorite()

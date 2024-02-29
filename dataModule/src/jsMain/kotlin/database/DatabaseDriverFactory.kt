@@ -9,8 +9,10 @@ import org.w3c.dom.Worker
 actual class DatabaseDriverFactory {
 
     actual suspend fun createDriver(): SqlDriver {
-        val worker = Worker(js("""new URL("@cashapp/sqldelight-sqljs-worker/sqljs.worker.js", import.meta.url)"""))
-        val driver: SqlDriver = WebWorkerDriver(worker)
+        @Suppress("UnsafeCastFromDynamic")
+        val driver: SqlDriver = WebWorkerDriver(
+            Worker(js("""new URL("@cashapp/sqldelight-sqljs-worker/sqljs.worker.js", import.meta.url)"""))
+        )
 
         MyDatabase.Schema.awaitCreate(driver)
         return driver
