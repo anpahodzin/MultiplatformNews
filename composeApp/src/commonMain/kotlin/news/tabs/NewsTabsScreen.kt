@@ -17,6 +17,7 @@ import com.arkivanov.decompose.extensions.compose.pages.PagesScrollAnimation
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
 import extension.pxToDp
 import multiplatformnews.composeapp.generated.resources.Res
+import multiplatformnews.composeapp.generated.resources.*
 import news.favorite.NewsFavoriteScreen
 import news.list.NewsListScreen
 import org.jetbrains.compose.resources.painterResource

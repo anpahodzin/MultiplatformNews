@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.sp
 import multiplatformnews.composeapp.generated.resources.Res
+import multiplatformnews.composeapp.generated.resources.top_headlines
 import news.model.NewsCategory
 import news.toLocalizedString
 import org.jetbrains.compose.resources.stringResource

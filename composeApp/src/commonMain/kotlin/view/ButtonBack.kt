@@ -4,6 +4,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import multiplatformnews.composeapp.generated.resources.Res
+import multiplatformnews.composeapp.generated.resources.back
+import multiplatformnews.composeapp.generated.resources.ic_arrow_back_24
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 

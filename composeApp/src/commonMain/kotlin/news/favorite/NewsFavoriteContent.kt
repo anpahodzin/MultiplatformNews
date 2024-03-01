@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.sp
 import multiplatformnews.composeapp.generated.resources.Res
+import multiplatformnews.composeapp.generated.resources.favorite
 import news.list.NewsCard
 import news.model.News
 import org.jetbrains.compose.resources.stringResource

@@ -33,6 +33,8 @@ import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.sp
 import extension.pxToDp
 import multiplatformnews.composeapp.generated.resources.Res
+import multiplatformnews.composeapp.generated.resources.something_went_wrong
+import multiplatformnews.composeapp.generated.resources.try_again
 import news.model.News
 import news.model.NewsCategory
 import org.jetbrains.compose.resources.stringResource

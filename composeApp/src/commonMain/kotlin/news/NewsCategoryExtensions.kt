@@ -2,6 +2,7 @@ package news
 
 import androidx.compose.runtime.Composable
 import multiplatformnews.composeapp.generated.resources.Res
+import multiplatformnews.composeapp.generated.resources.*
 import news.model.NewsCategory
 import org.jetbrains.compose.resources.stringResource
 
