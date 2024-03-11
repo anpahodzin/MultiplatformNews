@@ -1,11 +1,11 @@
-package news.topheadlines
+package news.everything
 
 import core.flow.AnyStateFlow
 import news.model.News
 import news.model.NewsCategory
 
-interface NewsTopHeadlinesComponent {
-    val state: AnyStateFlow<NewsTopHeadlinesUiState>
+interface NewsEverythingComponent {
+    val state: AnyStateFlow<NewsEverythingUiState>
 
     fun onNewsSelected(news: News)
 

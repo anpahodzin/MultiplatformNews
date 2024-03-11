@@ -1,4 +1,4 @@
-package news.topheadlines
+package news.eveything
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -37,14 +37,19 @@ import multiplatformnews.composeapp.generated.resources.something_went_wrong
 import multiplatformnews.composeapp.generated.resources.try_again
 import news.NewsCard
 import news.categories.NewsCategoryBar
+import news.detailed.NewsDetailedUiEvent
+import news.everything.NewsEverythingComponent
+import news.everything.NewsEverythingUiState
+import news.everything.getCategoryOrNull
+import news.everything.getNewsOrNull
 import news.model.News
 import news.model.NewsCategory
 import org.jetbrains.compose.resources.stringResource
 import theme.AppTheme
 
 @Composable
-fun NewsTopHeadlinesScreen(
-    component: NewsTopHeadlinesComponent,
+fun NewsEverythingScreen(
+    component: NewsEverythingComponent,
     bottomPadding: Dp
 ) {
     val componentState by component.state.collectAsState()
@@ -55,7 +60,7 @@ fun NewsTopHeadlinesScreen(
         componentState.getCategoryOrNull()?.let { category ->
 
             componentState.getNewsOrNull()?.let { newsList ->
-                NewsTopHeadlinesContent(
+                NewsListContent(
                     newsList = newsList,
                     category = category,
                     onNewsSelected = component::onNewsSelected,
@@ -75,13 +80,13 @@ fun NewsTopHeadlinesScreen(
         }
 
         when (val state = componentState) {
-            is NewsTopHeadlinesUiState.Data -> {
+            is NewsEverythingUiState.Data -> {
                 LaunchedEffect(state) {
                     lazyListState.scrollToItem(0)
                 }
             }
 
-            is NewsTopHeadlinesUiState.Error -> {
+            is NewsEverythingUiState.Error -> {
                 Column(
                     modifier = Modifier.align(Alignment.Center),
                     horizontalAlignment = Alignment.CenterHorizontally
@@ -101,7 +106,7 @@ fun NewsTopHeadlinesScreen(
                 }
             }
 
-            is NewsTopHeadlinesUiState.Loading, NewsTopHeadlinesUiState.Initial -> {
+            is NewsEverythingUiState.Loading, NewsEverythingUiState.Initial -> {
                 CircularProgressIndicator(
                     modifier = Modifier.align(Alignment.Center),
                     color = AppTheme.colors.secondary
@@ -112,7 +117,7 @@ fun NewsTopHeadlinesScreen(
 }
 
 @Composable
-private fun NewsTopHeadlinesContent(
+private fun NewsListContent(
     newsList: List<News>,
     category: NewsCategory,
     onNewsSelected: (News) -> Unit,
@@ -131,10 +136,10 @@ private fun NewsTopHeadlinesContent(
         state = lazyListState,
     ) {
         item(key = category) {
-            NewsTopHeadlinesHeader(
-                modifier = Modifier.widthIn(max = maxContentWidth),
-                category = category
-            )
+//            NewsTopHeadlinesHeader(
+//                modifier = Modifier.widthIn(max = maxContentWidth),
+//                category = category
+//            )
         }
         items(newsList, key = { item: News -> item.url }) {
             NewsCard(

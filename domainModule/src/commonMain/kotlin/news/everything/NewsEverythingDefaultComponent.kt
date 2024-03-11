@@ -1,4 +1,4 @@
-package news.topheadlines
+package news.everything
 
 import com.arkivanov.decompose.ComponentContext
 import core.flow.AnyStateFlow
@@ -8,14 +8,14 @@ import news.model.News
 import news.model.NewsCategory
 import org.koin.core.component.KoinComponent
 
-class NewsTopHeadlinesDefaultComponent(
+class NewsEverythingDefaultComponent(
     private val componentContext: ComponentContext,
     private val onNewsSelected: (news: News) -> Unit,
-) : NewsTopHeadlinesComponent, ComponentContext by componentContext, KoinComponent {
+) : NewsEverythingComponent, ComponentContext by componentContext, KoinComponent {
 
-    private val viewModel: NewsTopHeadlinesViewModel = getOrCreateViewModel()
+    private val viewModel: NewsEverythingViewModel = getOrCreateViewModel()
 
-    override val state: AnyStateFlow<NewsTopHeadlinesUiState> = viewModel.state.wrapToAny()
+    override val state: AnyStateFlow<NewsEverythingUiState> = viewModel.state.wrapToAny()
 
     override fun onNewsSelected(news: News) {
         onNewsSelected.invoke(news)

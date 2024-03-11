@@ -1,4 +1,4 @@
-package news.topheadlines
+package news.everything
 
 import core.ComponentViewModel
 import core.runCatchingCancellable
@@ -9,12 +9,12 @@ import kotlinx.coroutines.launch
 import news.NewsRepository
 import news.model.NewsCategory
 
-class NewsTopHeadlinesViewModel(private val repository: NewsRepository) : ComponentViewModel() {
+class NewsEverythingViewModel(private val repository: NewsRepository) : ComponentViewModel() {
 
     private val selectedCategory = MutableStateFlow(NewsCategory.Business)
 
     private val _state =
-        MutableStateFlow<NewsTopHeadlinesUiState>(NewsTopHeadlinesUiState.Initial)
+        MutableStateFlow<NewsEverythingUiState>(NewsEverythingUiState.Initial)
     val state = _state.asStateFlow()
 
     init {
@@ -27,13 +27,13 @@ class NewsTopHeadlinesViewModel(private val repository: NewsRepository) : Compon
 
     private fun updateTopHeadlinesNews(category: NewsCategory) {
         launch {
-            _state.tryEmit(NewsTopHeadlinesUiState.Loading(category))
+            _state.tryEmit(NewsEverythingUiState.Loading(category))
             runCatchingCancellable {
                 repository.getTopHeadlinesNews(category)
             }.onSuccess {
-                _state.tryEmit(NewsTopHeadlinesUiState.Data(category, it))
+                _state.tryEmit(NewsEverythingUiState.Data(category, it))
             }.onFailure {
-                _state.tryEmit(NewsTopHeadlinesUiState.Error(category))
+                _state.tryEmit(NewsEverythingUiState.Error(category))
             }
         }
     }

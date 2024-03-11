@@ -19,10 +19,12 @@ import com.arkivanov.decompose.extensions.compose.pages.PagesScrollAnimation
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
 import extension.pxToDp
 import multiplatformnews.composeapp.generated.resources.Res
+import multiplatformnews.composeapp.generated.resources.everything
 import multiplatformnews.composeapp.generated.resources.favorite
 import multiplatformnews.composeapp.generated.resources.ic_favorite_24
 import multiplatformnews.composeapp.generated.resources.ic_news_24
 import multiplatformnews.composeapp.generated.resources.news
+import news.eveything.NewsEverythingScreen
 import news.favorite.NewsFavoriteScreen
 import news.topheadlines.NewsTopHeadlinesScreen
 import org.jetbrains.compose.resources.painterResource
@@ -52,6 +54,14 @@ fun NewsTabsScreen(
                     color = AppColors.blueGray400,
                 )
 
+            NewsTabsDefaultComponent.TabConfig.NewsEverything ->
+                BottomBarTab(
+                    title = stringResource(Res.string.everything),
+                    icon = painterResource(Res.drawable.ic_news_24),
+                    selectedColor = AppColors.dodgerBlue600,
+                    color = AppColors.blueGray400,
+                )
+
             NewsTabsDefaultComponent.TabConfig.NewsFavorite ->
                 BottomBarTab(
                     title = stringResource(Res.string.favorite),
@@ -75,6 +85,11 @@ fun NewsTabsScreen(
         ) { _, page ->
             when (page) {
                 is NewsTabsComponent.TabChild.NewsTopHeadlines -> NewsTopHeadlinesScreen(
+                    component = page.component,
+                    bottomPadding = bottomBarSize.height.pxToDp()
+                )
+
+                is NewsTabsComponent.TabChild.NewsEverything -> NewsEverythingScreen(
                     component = page.component,
                     bottomPadding = bottomBarSize.height.pxToDp()
                 )
