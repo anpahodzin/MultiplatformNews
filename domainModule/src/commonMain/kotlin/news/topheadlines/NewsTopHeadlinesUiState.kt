@@ -1,4 +1,4 @@
-package news.list
+package news.topheadlines
 
 import news.model.News
 import news.model.NewsCategory

@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
@@ -44,13 +43,8 @@ fun CustomBottomNavigation(
     selectedTab: Int,
     onTabSelected: (BottomBarTab, Int) -> Unit,
 ) {
-    Row(
-        modifier = modifier
-            .navigationBarsPadding()
-            .fillMaxWidth(),
-    ) {
+    Row(modifier = modifier.fillMaxWidth()) {
         tabs.forEachIndexed { index, tab ->
-
             CustomBottomBarTab(
                 modifier = Modifier
                     .weight(1f),

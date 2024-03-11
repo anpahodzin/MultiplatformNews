@@ -1,4 +1,4 @@
-package news.list
+package news.topheadlines
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -10,12 +10,12 @@ import androidx.compose.ui.unit.sp
 import multiplatformnews.composeapp.generated.resources.Res
 import multiplatformnews.composeapp.generated.resources.top_headlines
 import news.model.NewsCategory
-import news.toLocalizedString
+import news.categories.toLocalizedString
 import org.jetbrains.compose.resources.stringResource
 import theme.AppTheme
 
 @Composable
-fun NewsListHeader(
+fun NewsTopHeadlinesHeader(
     modifier: Modifier = Modifier,
     category: NewsCategory
 ) {

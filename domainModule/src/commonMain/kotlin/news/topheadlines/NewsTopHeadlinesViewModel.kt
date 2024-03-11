@@ -1,4 +1,4 @@
-package news.list
+package news.topheadlines
 
 import core.ComponentViewModel
 import core.runCatchingCancellable
@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 import news.NewsRepository
 import news.model.NewsCategory
 
-class NewsListViewModel(private val repository: NewsRepository) : ComponentViewModel() {
+class NewsTopHeadlinesViewModel(private val repository: NewsRepository) : ComponentViewModel() {
 
     private val selectedCategory = MutableStateFlow(NewsCategory.Business)
 

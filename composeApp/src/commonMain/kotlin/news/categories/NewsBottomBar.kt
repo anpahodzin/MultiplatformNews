@@ -1,4 +1,4 @@
-package news.list
+package news.categories
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -14,7 +14,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import news.model.NewsCategory
-import news.toLocalizedString
 import theme.AppTheme
 
 @Composable

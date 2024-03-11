@@ -2,6 +2,8 @@ package news.tabs
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -17,12 +19,16 @@ import com.arkivanov.decompose.extensions.compose.pages.PagesScrollAnimation
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
 import extension.pxToDp
 import multiplatformnews.composeapp.generated.resources.Res
-import multiplatformnews.composeapp.generated.resources.*
+import multiplatformnews.composeapp.generated.resources.favorite
+import multiplatformnews.composeapp.generated.resources.ic_favorite_24
+import multiplatformnews.composeapp.generated.resources.ic_news_24
+import multiplatformnews.composeapp.generated.resources.news
 import news.favorite.NewsFavoriteScreen
-import news.list.NewsListScreen
+import news.topheadlines.NewsTopHeadlinesScreen
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import theme.AppColors
+import theme.AppTheme
 import view.BottomBarTab
 import view.CustomBottomNavigation
 
@@ -38,7 +44,7 @@ fun NewsTabsScreen(
     val tabs = childPages.items.map {
         when (it.configuration as? NewsTabsDefaultComponent.TabConfig) {
 
-            NewsTabsDefaultComponent.TabConfig.NewsList ->
+            NewsTabsDefaultComponent.TabConfig.NewsTopHeadlines ->
                 BottomBarTab(
                     title = stringResource(Res.string.news),
                     icon = painterResource(Res.drawable.ic_news_24),
@@ -58,18 +64,17 @@ fun NewsTabsScreen(
         }
     }
 
-    Box {
+    Box(modifier = modifier) {
         var bottomBarSize by remember { mutableStateOf(IntSize.Zero) }
 
         Pages(
-            modifier = modifier,
             pages = childPages,
             onPageSelected = component::selectPage,
             scrollAnimation = PagesScrollAnimation.Default,
 //            pager = defaultHorizontalPager(userScrollEnabled = true),todo
         ) { _, page ->
             when (page) {
-                is NewsTabsComponent.TabChild.NewsList -> NewsListScreen(
+                is NewsTabsComponent.TabChild.NewsTopHeadlines -> NewsTopHeadlinesScreen(
                     component = page.component,
                     bottomPadding = bottomBarSize.height.pxToDp()
                 )
@@ -84,7 +89,9 @@ fun NewsTabsScreen(
         CustomBottomNavigation(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
-                .onSizeChanged { bottomBarSize = it },
+                .onSizeChanged { bottomBarSize = it }
+                .navigationBarsPadding()
+                .padding(bottom = AppTheme.sizes.medium),
             tabs,
             childPages.selectedIndex
         ) { _, index ->

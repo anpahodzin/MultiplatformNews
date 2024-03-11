@@ -1,4 +1,4 @@
-package news.list
+package news
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

@@ -10,7 +10,7 @@ import com.arkivanov.decompose.router.pages.select
 import com.arkivanov.decompose.value.Value
 import kotlinx.serialization.Serializable
 import news.favorite.NewsFavoriteDefaultComponent
-import news.list.NewsListDefaultComponent
+import news.topheadlines.NewsTopHeadlinesDefaultComponent
 import news.model.News
 
 class NewsTabsDefaultComponent(
@@ -27,14 +27,14 @@ class NewsTabsDefaultComponent(
         serializer = TabConfig.serializer(),
         initialPages = {
             Pages(
-                listOf(TabConfig.NewsList, TabConfig.NewsFavorite),
+                listOf(TabConfig.NewsTopHeadlines, TabConfig.NewsFavorite),
                 selectedIndex = 0
             )
         },
     ) { config, componentContext ->
         when (config) {
-            TabConfig.NewsList -> NewsTabsComponent.TabChild.NewsList(
-                NewsListDefaultComponent(
+            TabConfig.NewsTopHeadlines -> NewsTabsComponent.TabChild.NewsTopHeadlines(
+                NewsTopHeadlinesDefaultComponent(
                     componentContext = componentContext,
                     onNewsSelected = onNewsSelected,
                 )
@@ -57,7 +57,7 @@ class NewsTabsDefaultComponent(
     @Serializable
     sealed interface TabConfig {
         @Serializable
-        data object NewsList : TabConfig
+        data object NewsTopHeadlines : TabConfig
 
         @Serializable
         data object NewsFavorite : TabConfig

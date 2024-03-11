@@ -1,4 +1,4 @@
-package news.list
+package news.topheadlines
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -35,14 +35,16 @@ import extension.pxToDp
 import multiplatformnews.composeapp.generated.resources.Res
 import multiplatformnews.composeapp.generated.resources.something_went_wrong
 import multiplatformnews.composeapp.generated.resources.try_again
+import news.NewsCard
+import news.categories.NewsCategoryBar
 import news.model.News
 import news.model.NewsCategory
 import org.jetbrains.compose.resources.stringResource
 import theme.AppTheme
 
 @Composable
-fun NewsListScreen(
-    component: NewsListComponent,
+fun NewsTopHeadlinesScreen(
+    component: NewsTopHeadlinesComponent,
     bottomPadding: Dp
 ) {
     val componentState by component.state.collectAsState()
@@ -129,7 +131,7 @@ private fun NewsListContent(
         state = lazyListState,
     ) {
         item(key = category) {
-            NewsListHeader(
+            NewsTopHeadlinesHeader(
                 modifier = Modifier.widthIn(max = maxContentWidth),
                 category = category
             )
