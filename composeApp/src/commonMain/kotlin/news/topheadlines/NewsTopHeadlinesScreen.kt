@@ -36,9 +36,9 @@ import multiplatformnews.composeapp.generated.resources.Res
 import multiplatformnews.composeapp.generated.resources.something_went_wrong
 import multiplatformnews.composeapp.generated.resources.try_again
 import news.NewsCard
-import news.categories.NewsCategoryBar
 import news.model.News
 import news.model.NewsCategory
+import news.topheadlines.category.NewsCategoryBar
 import org.jetbrains.compose.resources.stringResource
 import theme.AppTheme
 
