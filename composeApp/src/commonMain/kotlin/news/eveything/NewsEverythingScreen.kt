@@ -8,8 +8,11 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.safeDrawingPadding
+import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
@@ -33,17 +36,14 @@ import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.sp
 import extension.pxToDp
 import multiplatformnews.composeapp.generated.resources.Res
+import multiplatformnews.composeapp.generated.resources.everything
 import multiplatformnews.composeapp.generated.resources.something_went_wrong
 import multiplatformnews.composeapp.generated.resources.try_again
 import news.NewsCard
-import news.categories.NewsCategoryBar
-import news.detailed.NewsDetailedUiEvent
 import news.everything.NewsEverythingComponent
 import news.everything.NewsEverythingUiState
-import news.everything.getCategoryOrNull
 import news.everything.getNewsOrNull
 import news.model.News
-import news.model.NewsCategory
 import org.jetbrains.compose.resources.stringResource
 import theme.AppTheme
 
@@ -55,29 +55,33 @@ fun NewsEverythingScreen(
     val componentState by component.state.collectAsState()
     Box(modifier = Modifier.fillMaxSize()) {
         var categoryBarSize by remember { mutableStateOf(IntSize.Zero) }
+        val imeBottomPadding = WindowInsets.ime.asPaddingValues().calculateBottomPadding()
+        val correctBottomPadding = if (bottomPadding > imeBottomPadding) {
+            bottomPadding + AppTheme.sizes.small
+        } else {
+            imeBottomPadding + AppTheme.sizes.small
+        }
         val lazyListState = rememberLazyListState()
 
-        componentState.getCategoryOrNull()?.let { category ->
-
-            componentState.getNewsOrNull()?.let { newsList ->
-                NewsListContent(
-                    newsList = newsList,
-                    category = category,
-                    onNewsSelected = component::onNewsSelected,
-                    bottomPadding = categoryBarSize.height.pxToDp() + bottomPadding,
-                    lazyListState = lazyListState
-                )
-            }
-
-            NewsCategoryBar(
-                modifier = Modifier
-                    .align(Alignment.BottomStart)
-                    .padding(bottom = bottomPadding + AppTheme.sizes.small)
-                    .onSizeChanged { categoryBarSize = it },
-                selectedNewsCategory = category,
-                onCategoryClick = component::onCategorySelected
+        componentState.getNewsOrNull()?.let { newsList ->
+            NewsListContent(
+                newsList = newsList,
+                onNewsSelected = component::onNewsSelected,
+                bottomPadding = categoryBarSize.height.pxToDp() + correctBottomPadding,
+                lazyListState = lazyListState
             )
         }
+
+        NewsSearchBar(
+            modifier = Modifier
+                .align(Alignment.BottomStart)
+                .fillMaxWidth()
+                .padding(horizontal = AppTheme.sizes.medium)
+                .padding(bottom = correctBottomPadding)
+                .onSizeChanged { categoryBarSize = it },
+            value = componentState.search,
+            onValueChange = component::onSearchQueryChanged,
+        )
 
         when (val state = componentState) {
             is NewsEverythingUiState.Data -> {
@@ -88,7 +92,9 @@ fun NewsEverythingScreen(
 
             is NewsEverythingUiState.Error -> {
                 Column(
-                    modifier = Modifier.align(Alignment.Center),
+                    modifier = Modifier
+                        .align(Alignment.Center)
+                        .safeDrawingPadding(),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(stringResource(Res.string.something_went_wrong), fontSize = 20.sp)
@@ -106,11 +112,15 @@ fun NewsEverythingScreen(
                 }
             }
 
-            is NewsEverythingUiState.Loading, NewsEverythingUiState.Initial -> {
+            is NewsEverythingUiState.Loading -> {
                 CircularProgressIndicator(
                     modifier = Modifier.align(Alignment.Center),
                     color = AppTheme.colors.secondary
                 )
+            }
+
+            is NewsEverythingUiState.Empty -> {
+
             }
         }
     }
@@ -119,27 +129,37 @@ fun NewsEverythingScreen(
 @Composable
 private fun NewsListContent(
     newsList: List<News>,
-    category: NewsCategory,
     onNewsSelected: (News) -> Unit,
     bottomPadding: Dp,
     lazyListState: LazyListState = rememberLazyListState(),
 ) {
-    val insets = WindowInsets.safeDrawing.asPaddingValues()
+    val topPadding = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
     val maxContentWidth = AppTheme.sizes.maxContentWidth
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(
-            top = insets.calculateTopPadding(),
-            bottom = insets.calculateBottomPadding() + bottomPadding
+            top = topPadding,
+            bottom = bottomPadding
         ),
         horizontalAlignment = Alignment.CenterHorizontally,
         state = lazyListState,
     ) {
-        item(key = category) {
-//            NewsTopHeadlinesHeader(
-//                modifier = Modifier.widthIn(max = maxContentWidth),
-//                category = category
-//            )
+        item {
+            Box(
+                modifier = Modifier.widthIn(max = maxContentWidth)
+            ) {
+                Text(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(
+                            horizontal = AppTheme.sizes.large,
+                            vertical = AppTheme.sizes.small
+                        ),
+                    text = stringResource(Res.string.everything),
+                    style = AppTheme.typography.lightTitleHeaderText,
+                    fontSize = 40.sp
+                )
+            }
         }
         items(newsList, key = { item: News -> item.url }) {
             NewsCard(

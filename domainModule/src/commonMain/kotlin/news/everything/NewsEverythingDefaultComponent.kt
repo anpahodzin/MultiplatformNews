@@ -5,7 +5,6 @@ import core.flow.AnyStateFlow
 import core.flow.wrapToAny
 import core.getOrCreateViewModel
 import news.model.News
-import news.model.NewsCategory
 import org.koin.core.component.KoinComponent
 
 class NewsEverythingDefaultComponent(
@@ -21,8 +20,8 @@ class NewsEverythingDefaultComponent(
         onNewsSelected.invoke(news)
     }
 
-    override fun onCategorySelected(category: NewsCategory) {
-        viewModel.onCategorySelected(category)
+    override fun onSearchQueryChanged(query: String) {
+        viewModel.onSearchQueryChanged(query)
     }
 
     override fun refresh() {

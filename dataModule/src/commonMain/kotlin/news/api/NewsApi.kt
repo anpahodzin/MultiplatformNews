@@ -9,12 +9,12 @@ import news.model.NewsDtoResponse
 
 internal class NewsApi(private val client: HttpClient) {
 
-    suspend fun getEverythingNews(query: String?, page: Int, pageSize: Int): NewsDtoResponse =
+    suspend fun getEverythingNews(query: String, page: Int, pageSize: Int): NewsDtoResponse =
         client.get {
             url { path("everything") }
             parameter("q", query)
-//            parameter("pageSize", pageSize)
-//            parameter("page", page)
+            parameter("pageSize", pageSize)
+            parameter("page", page)
         }.body<NewsDtoResponse>()
 
     suspend fun getTopHeadlinesNews(query: String? = null, category: String): NewsDtoResponse =
