@@ -1,0 +1,17 @@
+
+*.iml
+.gradle
+.idea
+.DS_Store
+build
+*/build
+captures
+.externalNativeBuild
+.cxx
+local.properties
+xcuserdata/
+Pods/
+*.jks
+.fleet
+composeApp/webpack.config.d/moko-resources-generated.js
+composeApp/karma.config.d/moko-resources-generated.js

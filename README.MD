@@ -1,4 +1,5 @@
-# Compose Multiplatform Application
+# Multiplatform News 
+Generated using https://terrakok.github.io/Compose-Multiplatform-Wizard/
 
 ## Before running!
  - check your system with [KDoctor](https://github.com/Kotlin/kdoctor)
@@ -23,4 +24,5 @@ To run the application on iPhone device/simulator:
 
 ### Browser
 Run the browser application: `./gradlew :composeApp:jsBrowserDevelopmentRun`
+If you need to update Yarn: `./gradlew :kotlinUpgradeYarnLock`
 
