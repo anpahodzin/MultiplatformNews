@@ -26,9 +26,7 @@ jobs:
           java-version: 17
 
       - name: Update Username from Secrets
-        env:
-          NEWS_API_KEY: ${{ secrets.NEWS_API_KEY }}
-        run: echo NEWS_API_KEY="$NEWS_API_KEY" > ./local.properties
+        run: echo "${{secrets.NEWS_API_KEY }}" > $GITHUB_WORKSPACE/local.properties
 
       - name: Build
         uses: gradle/gradle-build-action@v2
