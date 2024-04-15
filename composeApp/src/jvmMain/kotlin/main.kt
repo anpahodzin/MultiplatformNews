@@ -8,6 +8,7 @@ import com.arkivanov.decompose.extensions.compose.lifecycle.LifecycleController
 import com.arkivanov.essenty.lifecycle.LifecycleRegistry
 import di.initKoin
 import multiplatformnews.composeapp.generated.resources.Res
+import multiplatformnews.composeapp.generated.resources.app_name
 import org.jetbrains.compose.resources.stringResource
 import root.component.RootDefaultComponent
 import java.awt.Dimension
