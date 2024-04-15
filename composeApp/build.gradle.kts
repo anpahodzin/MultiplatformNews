@@ -59,12 +59,13 @@ kotlin {
                 api(libs.decompose)
                 api(libs.essenty)
                 implementation(libs.decompose.compose)
-                implementation(libs.composeImageLoader)
                 implementation(libs.kermit)
                 implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.kotlinx.serialization.json)
                 implementation(libs.kotlinx.datetime)
                 implementation(libs.koin.core)
+                implementation(libs.coil.compose)
+                implementation(libs.coil.network)
             }
         }
 
