@@ -18,6 +18,7 @@ kotlinx-datetime = "0.5.0"
 multiplatformSettings = "1.1.1"
 koin = "3.5.3"
 sqlDelight = "2.0.1"
+haze = "0.7.0"
 
 android-compileSdk = "34"
 android-minSdk = "24"
@@ -56,6 +57,10 @@ sqlDelight-driver-sqlite = { module = "app.cash.sqldelight:sqlite-driver", versi
 sqlDelight-driver-android = { module = "app.cash.sqldelight:android-driver", version.ref = "sqlDelight" }
 sqlDelight-driver-native = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelight" }
 sqlDelight-driver-js = { module = "app.cash.sqldelight:web-worker-driver", version.ref = "sqlDelight" }
+haze = { module = "dev.chrisbanes.haze:haze", version.ref = "haze" }
+#HAZE MODULE
+androidx-collection = "androidx.collection:collection:1.4.0"
+androidx-core = "androidx.core:core-ktx:1.12.0"
 
 [plugins]
 
