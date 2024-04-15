@@ -26,7 +26,8 @@ import multiplatformnews.composeapp.generated.resources.everything
 import multiplatformnews.composeapp.generated.resources.favorite
 import multiplatformnews.composeapp.generated.resources.ic_favorite_24
 import multiplatformnews.composeapp.generated.resources.ic_news_24
-import multiplatformnews.composeapp.generated.resources.news
+import multiplatformnews.composeapp.generated.resources.ic_search_24
+import multiplatformnews.composeapp.generated.resources.top
 import news.eveything.NewsEverythingScreen
 import news.favorite.NewsFavoriteScreen
 import news.topheadlines.NewsTopHeadlinesScreen
@@ -51,7 +52,7 @@ fun NewsTabsScreen(
 
             NewsTabsDefaultComponent.TabConfig.NewsTopHeadlines ->
                 BottomBarTab(
-                    title = stringResource(Res.string.news),
+                    title = stringResource(Res.string.top),
                     icon = painterResource(Res.drawable.ic_news_24),
                     selectedColor = AppColors.amber600,
                     color = AppColors.blueGray400,
@@ -60,7 +61,7 @@ fun NewsTabsScreen(
             NewsTabsDefaultComponent.TabConfig.NewsEverything ->
                 BottomBarTab(
                     title = stringResource(Res.string.everything),
-                    icon = painterResource(Res.drawable.ic_news_24),
+                    icon = painterResource(Res.drawable.ic_search_24),
                     selectedColor = AppColors.dodgerBlue600,
                     color = AppColors.blueGray400,
                 )

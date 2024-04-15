@@ -34,11 +34,14 @@ import androidx.compose.ui.unit.sp
 import extension.pxToDp
 import multiplatformnews.composeapp.generated.resources.Res
 import multiplatformnews.composeapp.generated.resources.something_went_wrong
+import multiplatformnews.composeapp.generated.resources.top_headlines
 import multiplatformnews.composeapp.generated.resources.try_again
 import news.NewsCard
+import news.NewsHeader
 import news.model.News
 import news.model.NewsCategory
 import news.topheadlines.category.NewsCategoryBar
+import news.topheadlines.category.toLocalizedString
 import org.jetbrains.compose.resources.stringResource
 import theme.AppTheme
 
@@ -131,9 +134,10 @@ private fun NewsTopHeadlinesContent(
         state = lazyListState,
     ) {
         item(key = category) {
-            NewsTopHeadlinesHeader(
+            NewsHeader(
                 modifier = Modifier.widthIn(max = maxContentWidth),
-                category = category
+                title = stringResource(Res.string.top_headlines),
+                subTitle = category.toLocalizedString()
             )
         }
         items(newsList, key = { item: News -> item.url }) {

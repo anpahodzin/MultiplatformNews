@@ -33,6 +33,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntSize
+import androidx.compose.ui.unit.max
 import androidx.compose.ui.unit.sp
 import extension.pxToDp
 import multiplatformnews.composeapp.generated.resources.Res
@@ -40,6 +41,7 @@ import multiplatformnews.composeapp.generated.resources.everything
 import multiplatformnews.composeapp.generated.resources.something_went_wrong
 import multiplatformnews.composeapp.generated.resources.try_again
 import news.NewsCard
+import news.NewsHeader
 import news.everything.NewsEverythingComponent
 import news.everything.NewsEverythingUiState
 import news.everything.getNewsOrNull
@@ -56,11 +58,7 @@ fun NewsEverythingScreen(
     Box(modifier = Modifier.fillMaxSize()) {
         var categoryBarSize by remember { mutableStateOf(IntSize.Zero) }
         val imeBottomPadding = WindowInsets.ime.asPaddingValues().calculateBottomPadding()
-        val correctBottomPadding = if (bottomPadding > imeBottomPadding) {
-            bottomPadding + AppTheme.sizes.small
-        } else {
-            imeBottomPadding + AppTheme.sizes.small
-        }
+        val correctBottomPadding = max(bottomPadding, imeBottomPadding)
         val lazyListState = rememberLazyListState()
 
         componentState.getNewsOrNull()?.let { newsList ->
@@ -78,7 +76,8 @@ fun NewsEverythingScreen(
                 .fillMaxWidth()
                 .padding(horizontal = AppTheme.sizes.medium)
                 .padding(bottom = correctBottomPadding)
-                .onSizeChanged { categoryBarSize = it },
+                .onSizeChanged { categoryBarSize = it }
+                .padding(vertical = AppTheme.sizes.medium),
             value = componentState.search,
             onValueChange = component::onSearchQueryChanged,
         )
@@ -145,21 +144,10 @@ private fun NewsListContent(
         state = lazyListState,
     ) {
         item {
-            Box(
-                modifier = Modifier.widthIn(max = maxContentWidth)
-            ) {
-                Text(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(
-                            horizontal = AppTheme.sizes.large,
-                            vertical = AppTheme.sizes.small
-                        ),
-                    text = stringResource(Res.string.everything),
-                    style = AppTheme.typography.lightTitleHeaderText,
-                    fontSize = 40.sp
-                )
-            }
+            NewsHeader(
+                modifier = Modifier.widthIn(max = maxContentWidth),
+                title = stringResource(Res.string.everything),
+            )
         }
         items(newsList, key = { item: News -> item.url }) {
             NewsCard(

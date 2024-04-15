@@ -1,7 +1,6 @@
 package news.topheadlines.category
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,7 +10,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.text.style.TextAlign
 import news.model.NewsCategory
 import theme.AppTheme
@@ -46,17 +45,7 @@ private fun CategoryButton(
     Text(
         modifier = modifier
             .padding(vertical = AppTheme.sizes.small, horizontal = AppTheme.sizes.small)
-//            .widthIn(min = 60.dp)
-            .run {
-                if (!isSelected) {
-                    border(
-                        width = AppTheme.sizes.borderMedium,
-                        color = AppTheme.colors.secondary,
-                        shape = AppTheme.shapes.circle
-                    )
-                } else this
-            }
-            .clip(AppTheme.shapes.circle)
+            .shadow(AppTheme.sizes.small, AppTheme.shapes.circle)
             .background(if (isSelected) AppTheme.colors.secondary else AppTheme.colors.onSecondary)
             .clickable(onClick = onClick)
             .padding(AppTheme.sizes.smallExtra),
