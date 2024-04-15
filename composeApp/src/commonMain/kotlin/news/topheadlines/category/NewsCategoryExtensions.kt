@@ -1,4 +1,4 @@
-package news.categories
+package news.topheadlines.category
 
 import androidx.compose.runtime.Composable
 import multiplatformnews.composeapp.generated.resources.Res

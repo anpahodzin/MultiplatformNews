@@ -10,7 +10,7 @@ import androidx.compose.ui.unit.sp
 import multiplatformnews.composeapp.generated.resources.Res
 import multiplatformnews.composeapp.generated.resources.top_headlines
 import news.model.NewsCategory
-import news.categories.toLocalizedString
+import news.topheadlines.category.toLocalizedString
 import org.jetbrains.compose.resources.stringResource
 import theme.AppTheme
 

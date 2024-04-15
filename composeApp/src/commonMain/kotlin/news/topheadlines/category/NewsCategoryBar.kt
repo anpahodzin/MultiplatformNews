@@ -1,4 +1,4 @@
-package news.categories
+package news.topheadlines.category
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border

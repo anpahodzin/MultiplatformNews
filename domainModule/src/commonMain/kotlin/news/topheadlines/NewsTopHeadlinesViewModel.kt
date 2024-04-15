@@ -14,7 +14,7 @@ class NewsTopHeadlinesViewModel(private val repository: NewsRepository) : Compon
     private val selectedCategory = MutableStateFlow(NewsCategory.Business)
 
     private val _state =
-        MutableStateFlow<NewsListUiState>(NewsListUiState.Initial)
+        MutableStateFlow<NewsTopHeadlinesUiState>(NewsTopHeadlinesUiState.Initial)
     val state = _state.asStateFlow()
 
     init {
@@ -27,13 +27,13 @@ class NewsTopHeadlinesViewModel(private val repository: NewsRepository) : Compon
 
     private fun updateTopHeadlinesNews(category: NewsCategory) {
         launch {
-            _state.tryEmit(NewsListUiState.Loading(category))
+            _state.tryEmit(NewsTopHeadlinesUiState.Loading(category))
             runCatchingCancellable {
                 repository.getTopHeadlinesNews(category)
             }.onSuccess {
-                _state.tryEmit(NewsListUiState.Data(category, it))
+                _state.tryEmit(NewsTopHeadlinesUiState.Data(category, it))
             }.onFailure {
-                _state.tryEmit(NewsListUiState.Error(category))
+                _state.tryEmit(NewsTopHeadlinesUiState.Error(category))
             }
         }
     }

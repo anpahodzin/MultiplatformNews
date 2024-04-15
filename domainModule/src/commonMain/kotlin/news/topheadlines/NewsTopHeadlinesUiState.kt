@@ -3,36 +3,36 @@ package news.topheadlines
 import news.model.News
 import news.model.NewsCategory
 
-sealed class NewsListUiState {
+sealed class NewsTopHeadlinesUiState {
 
-    data object Initial : NewsListUiState()
+    data object Initial : NewsTopHeadlinesUiState()
 
     data class Loading(
         val selectedCategory: NewsCategory,
-    ) : NewsListUiState()
+    ) : NewsTopHeadlinesUiState()
 
     data class Error(
         val selectedCategory: NewsCategory,
-    ) : NewsListUiState()
+    ) : NewsTopHeadlinesUiState()
 
     data class Data(
         val selectedCategory: NewsCategory,
         val newsList: List<News>,
-    ) : NewsListUiState()
+    ) : NewsTopHeadlinesUiState()
 }
 
-fun NewsListUiState.getNewsOrNull(): List<News>? =
+fun NewsTopHeadlinesUiState.getNewsOrNull(): List<News>? =
     when (this) {
-        is NewsListUiState.Data -> newsList
-        is NewsListUiState.Error -> null
-        is NewsListUiState.Initial -> null
-        is NewsListUiState.Loading -> null
+        is NewsTopHeadlinesUiState.Data -> newsList
+        is NewsTopHeadlinesUiState.Error -> null
+        is NewsTopHeadlinesUiState.Initial -> null
+        is NewsTopHeadlinesUiState.Loading -> null
     }
 
-fun NewsListUiState.getCategoryOrNull(): NewsCategory? =
+fun NewsTopHeadlinesUiState.getCategoryOrNull(): NewsCategory? =
     when (this) {
-        is NewsListUiState.Data -> selectedCategory
-        is NewsListUiState.Error -> selectedCategory
-        is NewsListUiState.Initial -> null
-        is NewsListUiState.Loading -> selectedCategory
+        is NewsTopHeadlinesUiState.Data -> selectedCategory
+        is NewsTopHeadlinesUiState.Error -> selectedCategory
+        is NewsTopHeadlinesUiState.Initial -> null
+        is NewsTopHeadlinesUiState.Loading -> selectedCategory
     }
