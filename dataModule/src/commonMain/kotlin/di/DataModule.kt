@@ -9,6 +9,8 @@ import news.NewsDataRepository
 import news.NewsMemoryCache
 import news.NewsRepository
 import news.api.NewsApi
+import news.api.NewsMockApi
+import news.api.NewsRemoteApi
 import news.database.NewsDatabase
 import org.koin.core.module.dsl.singleOf
 import org.koin.core.scope.Scope
@@ -24,7 +26,13 @@ val dataModule = module {
 
 
     //News Feature
-    single { NewsApi(newsHttpClient()) }
+    single {
+        if (BuildConfig.newsApiKey.isNotBlank()) {
+            NewsRemoteApi(newsHttpClient())
+        } else {
+            NewsMockApi(get())
+        }
+    } bind NewsApi::class
     singleOf(::NewsDatabase)
     singleOf(::NewsDataRepository) bind NewsRepository::class
     singleOf(::NewsMemoryCache)
