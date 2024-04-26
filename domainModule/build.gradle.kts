@@ -32,6 +32,7 @@ kotlin {
             implementation(libs.koin.core)
             implementation(libs.kermit)
             implementation(libs.decompose)
+            implementation(libs.paging.common)
         }
         commonTest.dependencies {
             implementation(kotlin("test"))

@@ -18,6 +18,7 @@ multiplatformSettings = "1.1.1"
 koin = "3.5.3"
 sqlDelight = "2.0.1"
 coil = "3.0.0-alpha06"
+paging = "3.3.0-alpha02-0.5.1"
 #haze = "0.7.0"
 
 android-compileSdk = "34"
@@ -58,6 +59,8 @@ sqlDelight-driver-native = { module = "app.cash.sqldelight:native-driver", versi
 sqlDelight-driver-js = { module = "app.cash.sqldelight:web-worker-driver", version.ref = "sqlDelight" }
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
 coil-network = { module = "io.coil-kt.coil3:coil-network-ktor", version.ref = "coil" }
+paging-common = { module = "app.cash.paging:paging-common", version.ref = "paging" }
+paging-compose = { module = "app.cash.paging:paging-compose-common", version.ref = "paging" }
 #haze = { module = "dev.chrisbanes.haze:haze", version.ref = "haze" }
 #HAZE MODULE
 androidx-collection = "androidx.collection:collection:1.4.0"
