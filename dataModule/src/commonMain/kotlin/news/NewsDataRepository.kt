@@ -10,7 +10,6 @@ import news.api.NewsApi
 import news.database.NewsDatabase
 import news.database.toDomain
 import news.model.News
-import news.model.NewsCategory
 import news.model.toDomain
 
 internal class NewsDataRepository(
@@ -26,12 +25,6 @@ internal class NewsDataRepository(
             .toDomain()
             .also { cache[cacheKey] = it }
     }
-
-    override suspend fun getTopHeadlinesNews(category: NewsCategory): List<News> =
-        cache[category] ?: api
-            .getTopHeadlinesNews(category = category.name)
-            .toDomain()
-            .also { cache[category] = it }
 
     private suspend fun addNewsToFavourite(news: News) = with(news) {
         database().insertFavorite(
