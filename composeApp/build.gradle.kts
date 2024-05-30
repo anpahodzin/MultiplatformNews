@@ -66,6 +66,8 @@ kotlin {
                 implementation(libs.koin.core)
                 implementation(libs.coil.compose)
                 implementation(libs.coil.network)
+                implementation(libs.paging.common)
+                implementation(libs.paging.compose)
             }
         }
 
