@@ -2,7 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 plugins {
   alias(libs.plugins.multiplatform)
-  alias(libs.plugins.compose)
+  alias(libs.plugins.jetbrainsCompose)
+  alias(libs.plugins.compose.compiler)
   alias(libs.plugins.androidLibrary)
 }
 
