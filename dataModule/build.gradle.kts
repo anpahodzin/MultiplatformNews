@@ -43,6 +43,7 @@ kotlin {
             implementation(libs.kermit)
             implementation(libs.multiplatformSettings)
             implementation(libs.sqlDelight.coroutines)
+            implementation(libs.paging.common)
         }
         commonTest.dependencies {
             implementation(kotlin("test"))
