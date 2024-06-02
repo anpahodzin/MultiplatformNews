@@ -1,4 +1,4 @@
-package news.topheadlines
+package news
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -7,32 +7,30 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.sp
-import multiplatformnews.composeapp.generated.resources.Res
-import multiplatformnews.composeapp.generated.resources.top_headlines
-import news.model.NewsCategory
-import news.categories.toLocalizedString
-import org.jetbrains.compose.resources.stringResource
 import theme.AppTheme
 
 @Composable
-fun NewsTopHeadlinesHeader(
+fun NewsHeader(
     modifier: Modifier = Modifier,
-    category: NewsCategory
+    title: String,
+    subTitle: String? = null,
 ) {
     Column(
         modifier = modifier
             .padding(horizontal = AppTheme.sizes.large, vertical = AppTheme.sizes.small)
     ) {
         Text(
-            text = stringResource(Res.string.top_headlines),
+            text = title,
             modifier = Modifier.fillMaxWidth(),
             style = AppTheme.typography.lightTitleHeaderText,
             fontSize = 40.sp
         )
-        Text(
-            text = category.toLocalizedString(),
-            style = AppTheme.typography.lightTitleHeaderText,
-            fontSize = 30.sp
-        )
+        subTitle?.let {
+            Text(
+                text = it,
+                style = AppTheme.typography.lightTitleHeaderText,
+                fontSize = 30.sp
+            )
+        }
     }
 }

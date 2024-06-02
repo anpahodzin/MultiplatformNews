@@ -2,7 +2,8 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 plugins {
     alias(libs.plugins.multiplatform)
-    alias(libs.plugins.compose)
+    alias(libs.plugins.jetbrainsCompose)
+    alias(libs.plugins.compose.compiler)
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinx.serialization)
 }
@@ -49,6 +50,7 @@ kotlin {
             dependencies {
                 implementation(projects.domainModule)
                 implementation(projects.dataModule)
+                implementation(projects.haze)
 
                 implementation(compose.runtime)
                 implementation(compose.material)
@@ -58,12 +60,15 @@ kotlin {
                 api(libs.decompose)
                 api(libs.essenty)
                 implementation(libs.decompose.compose)
-                implementation(libs.composeImageLoader)
                 implementation(libs.kermit)
                 implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.kotlinx.serialization.json)
                 implementation(libs.kotlinx.datetime)
                 implementation(libs.koin.core)
+                implementation(libs.coil.compose)
+                implementation(libs.coil.network)
+                implementation(libs.paging.common)
+                implementation(libs.paging.compose)
             }
         }
 
@@ -144,4 +149,8 @@ compose.desktop {
 
 compose.experimental {
     web.application {}
+}
+
+composeCompiler {
+    enableStrongSkippingMode = true
 }

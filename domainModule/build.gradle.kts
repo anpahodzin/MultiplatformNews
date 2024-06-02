@@ -15,10 +15,7 @@ kotlin {
 
     jvm()
 
-    js {
-        browser()
-        binaries.executable()
-    }
+    js { browser() }
 
     iosX64()
     iosArm64()
@@ -32,6 +29,7 @@ kotlin {
             implementation(libs.koin.core)
             implementation(libs.kermit)
             implementation(libs.decompose)
+            implementation(libs.paging.common)
         }
         commonTest.dependencies {
             implementation(kotlin("test"))
@@ -42,12 +40,6 @@ kotlin {
 
         jvmMain.dependencies {
             implementation(libs.kotlinx.coroutines.swing)
-        }
-
-        jsMain.dependencies {
-        }
-
-        iosMain.dependencies {
         }
     }
 }

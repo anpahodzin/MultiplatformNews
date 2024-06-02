@@ -15,8 +15,12 @@
 
     <string name="something_went_wrong">Something went wrong</string>
     <string name="try_again">Try again</string>
+    <string name="retry">Retry</string>
     <string name="top_headlines">Top headlines</string>
     <string name="favorite">Favorite</string>
     <string name="news_added_to_favorites">News added to favorites</string>
     <string name="news_removed_from_favorites">News removed from favorites</string>
+    <string name="everything">Everything</string>
+    <string name="top">Top</string>
+    <string name="search">Search</string>
 </resources>

@@ -1,39 +1,32 @@
 package news.topheadlines
 
+import app.cash.paging.createPagingConfig
 import core.ComponentViewModel
-import core.runCatchingCancellable
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.launch
-import news.NewsRepository
+import news.NewsPagingRepository
 import news.model.NewsCategory
 
-class NewsTopHeadlinesViewModel(private val repository: NewsRepository) : ComponentViewModel() {
+class NewsTopHeadlinesViewModel(private val repository: NewsPagingRepository) :
+    ComponentViewModel() {
 
     private val selectedCategory = MutableStateFlow(NewsCategory.Business)
 
     private val _state =
-        MutableStateFlow<NewsListUiState>(NewsListUiState.Initial)
+        MutableStateFlow(NewsTopHeadlinesUiState(NewsCategory.Business, emptyFlow()))
     val state = _state.asStateFlow()
 
     init {
         launch {
-            selectedCategory.collectLatest {
-                updateTopHeadlinesNews(category = it)
-            }
-        }
-    }
-
-    private fun updateTopHeadlinesNews(category: NewsCategory) {
-        launch {
-            _state.tryEmit(NewsListUiState.Loading(category))
-            runCatchingCancellable {
-                repository.getTopHeadlinesNews(category)
-            }.onSuccess {
-                _state.tryEmit(NewsListUiState.Data(category, it))
-            }.onFailure {
-                _state.tryEmit(NewsListUiState.Error(category))
+            selectedCategory.collectLatest { category ->
+                val pagingDataFlow = repository.getPagingTopHeadlinesNews(
+                    config = createPagingConfig(PAGE_SIZE),
+                    category = category
+                )
+                _state.tryEmit(NewsTopHeadlinesUiState(category, pagingDataFlow))
             }
         }
     }
@@ -43,6 +36,9 @@ class NewsTopHeadlinesViewModel(private val repository: NewsRepository) : Compon
     }
 
     fun refresh() {
-        updateTopHeadlinesNews(selectedCategory.value)
+    }
+
+    companion object{
+        private const val PAGE_SIZE = 10
     }
 }

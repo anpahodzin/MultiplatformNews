@@ -19,10 +19,7 @@ kotlin {
 
     jvm()
 
-    js {
-        browser()
-        binaries.executable()
-    }
+    js { browser() }
 
     iosX64()
     iosArm64()
@@ -43,6 +40,7 @@ kotlin {
             implementation(libs.kermit)
             implementation(libs.multiplatformSettings)
             implementation(libs.sqlDelight.coroutines)
+            implementation(libs.paging.common)
         }
         commonTest.dependencies {
             implementation(kotlin("test"))
@@ -63,7 +61,7 @@ kotlin {
             implementation(libs.ktor.client.js)
             implementation(libs.sqlDelight.driver.js)
             implementation(npm("@cashapp/sqldelight-sqljs-worker", libs.versions.sqlDelight.get()))
-            implementation(npm("sql.js", "1.8.0"))
+            implementation(npm("sql.js", "1.10.3"))
             implementation(devNpm("copy-webpack-plugin", "9.1.0"))
         }
 

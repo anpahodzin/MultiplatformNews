@@ -15,7 +15,7 @@ class NewsTopHeadlinesDefaultComponent(
 
     private val viewModel: NewsTopHeadlinesViewModel = getOrCreateViewModel()
 
-    override val state: AnyStateFlow<NewsListUiState> = viewModel.state.wrapToAny()
+    override val state: AnyStateFlow<NewsTopHeadlinesUiState> = viewModel.state.wrapToAny()
 
     override fun onNewsSelected(news: News) {
         onNewsSelected.invoke(news)
