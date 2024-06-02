@@ -15,10 +15,7 @@ kotlin {
 
     jvm()
 
-    js {
-        browser()
-        binaries.executable()
-    }
+    js { browser() }
 
     iosX64()
     iosArm64()
@@ -43,12 +40,6 @@ kotlin {
 
         jvmMain.dependencies {
             implementation(libs.kotlinx.coroutines.swing)
-        }
-
-        jsMain.dependencies {
-        }
-
-        iosMain.dependencies {
         }
     }
 }

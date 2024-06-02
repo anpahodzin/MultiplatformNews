@@ -11,12 +11,12 @@ essenty = "2.0.0-alpha07"
 kermit = "2.0.2"
 buildConfig = "5.3.3"
 kotlinx-coroutines = "1.8.0"
-ktor = "2.3.8"
+ktor = "3.0.0-wasm2"
 kotlinx-serialization = "1.6.2"
 kotlinx-datetime = "0.5.0"
 multiplatformSettings = "1.1.1"
-koin = "3.5.3"
-sqlDelight = "2.0.1"
+koin = "3.6.0-Beta4"
+sqlDelight = "2.0.2"
 coil = "3.0.0-alpha06"
 paging = "3.3.0-alpha02-0.5.1"
 #haze = "0.7.0"
@@ -58,6 +58,7 @@ sqlDelight-driver-android = { module = "app.cash.sqldelight:android-driver", ver
 sqlDelight-driver-native = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelight" }
 sqlDelight-driver-js = { module = "app.cash.sqldelight:web-worker-driver", version.ref = "sqlDelight" }
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
+coil_compose_core = { module = "io.coil-kt.coil3:coil-compose-core", version.ref = "coil" }
 coil-network = { module = "io.coil-kt.coil3:coil-network-ktor", version.ref = "coil" }
 paging-common = { module = "app.cash.paging:paging-common", version.ref = "paging" }
 paging-compose = { module = "app.cash.paging:paging-compose-common", version.ref = "paging" }
@@ -69,8 +70,8 @@ androidx-core = "androidx.core:core-ktx:1.12.0"
 [plugins]
 
 multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
-jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 buildConfig = { id = "com.github.gmazzo.buildconfig", version.ref = "buildConfig" }

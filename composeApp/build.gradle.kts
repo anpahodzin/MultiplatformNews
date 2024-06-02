@@ -150,3 +150,7 @@ compose.desktop {
 compose.experimental {
     web.application {}
 }
+
+composeCompiler {
+    enableStrongSkippingMode = true
+}
