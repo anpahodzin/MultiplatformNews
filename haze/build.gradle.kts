@@ -3,7 +3,6 @@
 plugins {
   alias(libs.plugins.multiplatform)
   alias(libs.plugins.jetbrainsCompose)
-  alias(libs.plugins.compose.compiler)
   alias(libs.plugins.androidLibrary)
 }
 
@@ -57,7 +56,13 @@ kotlin {
       dependsOn(commonMain.get())
     }
 
-    iosMain {
+    val iosX64Main by getting{
+      dependsOn(skikoMain)
+    }
+    val iosArm64Main by getting{
+      dependsOn(skikoMain)
+    }
+    val iosSimulatorArm64Main by getting{
       dependsOn(skikoMain)
     }
 

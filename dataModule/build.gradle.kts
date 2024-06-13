@@ -85,7 +85,9 @@ buildConfig {
     // BuildConfig configuration here.
     // https://github.com/gmazzo/gradle-buildconfig-plugin#usage-in-kts
     val keystoreFile = project.rootProject.file("local.properties")
-    val properties = Properties().apply { load(keystoreFile.inputStream()) }
+    val properties = if (keystoreFile.exists()) {
+        Properties().apply { load(keystoreFile.inputStream()) }
+    } else Properties()
 
     buildConfigField("newsApiUrl", "https://newsapi.org/v2/")
     buildConfigField("newsApiKey", properties.getProperty("NEWS_API_KEY") ?: "")
