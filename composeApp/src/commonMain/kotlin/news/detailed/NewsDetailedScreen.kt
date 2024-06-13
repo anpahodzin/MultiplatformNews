@@ -76,8 +76,6 @@ fun NewsDetailedScreen(component: NewsDetailedComponent) {
 
     component.eventChannel.collectSideEffect { event ->
         snackbarHostState.currentSnackbarData?.dismiss()
-        coroutineScope.launch {
-            snackbarHostState.showSnackbar(message = event.toMessage())
-        }
+        snackbarHostState.showSnackbar(message = event.toMessage())
     }
 }
