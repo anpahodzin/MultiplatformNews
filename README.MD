@@ -1,5 +1,14 @@
-# Multiplatform News 
+# Multiplatform News
+=
 Generated using https://terrakok.github.io/Compose-Multiplatform-Wizard/
+
+<img src = "screen/demo.png" width="350" alt="Multiplatform News"/>
+
+Compose KMP Demo Application
+-
+Support platform: Android,IOS, Desktop(JVM), Web(JS)
+
+<img src = "screen/ios-demo.gif" width="350" alt="Multiplatform News ios"/>
 
 ## Before running!
  - check your system with [KDoctor](https://github.com/Kotlin/kdoctor)
@@ -23,6 +32,6 @@ To run the application on iPhone device/simulator:
  - Or use [Kotlin Multiplatform Mobile plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform-mobile) for Android Studio
 
 ### Browser
-Run the browser application: `./gradlew :composeApp:jsBrowserDevelopmentRun`
+Run the browser application: `./gradlew :composeApp:jsBrowserDevelopmentRun`\
 If you need to update Yarn: `./gradlew :kotlinUpgradeYarnLock`
 

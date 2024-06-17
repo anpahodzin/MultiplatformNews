@@ -17,7 +17,7 @@ class Paging3DataSource<T : Any>(
                 if (pageNumber * pageSize >= pagedData.total) null else pageNumber + 1
             val prevPageNumber = if (pageNumber > 1) pageNumber - 1 else null
 
-            return PagingSourceLoadResultPage<Int, T>(
+            return PagingSourceLoadResultPage(
                 data = pagedData.data,
                 prevKey = prevPageNumber,
                 nextKey = nextPageNumber,

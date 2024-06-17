@@ -18,5 +18,7 @@ fun NewsDtoResponse.toDomain(): List<News> = articles
 fun NewsDtoResponse.toPagedData(): PagedData<News> =
     PagedData(
         totalResults,
-        articles.map { it.toDomain() }
+        articles
+            .filter { it.url != "https://removed.com" } //todo
+            .map { it.toDomain() }
     )
