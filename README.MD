@@ -7,9 +7,9 @@
 ![Static Badge](https://img.shields.io/badge/platform-js-yellow)
 
 Sample KMP and Compose Multiplatform application showing news using [NewsAPI](https://newsapi.org/)\
-Generated using [Compose Multiplatform Wizard](https://terrakok.github.io/Compose-Multiplatform-Wizard/)\
+Generated using [Compose Multiplatform Wizard](https://terrakok.github.io/Compose-Multiplatform-Wizard/)
 
-<img src = "screen/demo.png" width="750" alt="Multiplatform News"/>\
+<img src = "screen/demo.png" width="750" alt="Multiplatform News"/>
 
 Stack:
 * [Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform)
@@ -26,7 +26,7 @@ Stack:
 * [Coil](https://github.com/coil-kt/coil)
 * [Multiplatform Paging](https://github.com/cashapp/multiplatform-paging)
 
-<img src = "screen/ios-demo.gif" width="350" alt="Multiplatform News ios"/>\
+<img src = "screen/ios-demo.gif" width="350" alt="Multiplatform News ios"/>
 
 ## Before running!
 - check your system with [KDoctor](https://github.com/Kotlin/kdoctor)
