@@ -6,14 +6,7 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.gestures.detectTapGestures
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -26,12 +19,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.toRect
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Path
-import androidx.compose.ui.graphics.PathEffect
-import androidx.compose.ui.graphics.PathMeasure
-import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.input.pointer.pointerInput
@@ -108,7 +96,7 @@ fun CustomBottomNavigationBar(
 //                .clip(shape)
         ) {
             val path = Path().apply {
-                addRect(size.toRect())
+                addRect(size.toRect(), direction = Path.Direction.Clockwise)
 //                addRoundRect(
 //                    RoundRect(
 //                        size.toRect(),
@@ -135,7 +123,7 @@ fun CustomBottomNavigationBar(
                 style = Stroke(
                     width = borderWidth,
                     pathEffect = PathEffect.dashPathEffect(
-                        intervals = floatArrayOf(length / 2, length),
+                        intervals = floatArrayOf(length / 2, length / 2),
                         phase = length
                     )
                 )
