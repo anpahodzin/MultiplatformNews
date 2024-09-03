@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.unit.IntSize
 import com.arkivanov.decompose.ExperimentalDecomposeApi
-import com.arkivanov.decompose.extensions.compose.pages.Pages
+import com.arkivanov.decompose.extensions.compose.pages.ChildPages
 import com.arkivanov.decompose.extensions.compose.pages.PagesScrollAnimation
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
 import dev.chrisbanes.haze.HazeState
@@ -37,7 +37,6 @@ import theme.AppColors
 import view.BottomBarTab
 import view.CustomBottomNavigationBar
 
-@OptIn(ExperimentalDecomposeApi::class, ExperimentalFoundationApi::class)
 @Composable
 fun NewsTabsScreen(
     component: NewsTabsComponent,
@@ -81,7 +80,7 @@ fun NewsTabsScreen(
     Box(modifier = modifier) {
         var bottomBarSize by remember { mutableStateOf(IntSize.Zero) }
 
-        Pages(
+        ChildPages(
             modifier = Modifier.haze(state = hazeState),
             pages = childPages,
             onPageSelected = component::selectPage,

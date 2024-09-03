@@ -2,7 +2,8 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 plugins {
     alias(libs.plugins.multiplatform)
-    alias(libs.plugins.jetbrainsCompose)
+    alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.compose)
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinx.serialization)
 }
@@ -45,30 +46,28 @@ kotlin {
                 optIn("org.jetbrains.compose.resources.ExperimentalResourceApi")
             }
         }
-        val commonMain by getting {
-            dependencies {
-                implementation(projects.domainModule)
-                implementation(projects.dataModule)
-                implementation(projects.haze)
+        commonMain.dependencies{
+            implementation(projects.domainModule)
+            implementation(projects.dataModule)
 
-                implementation(compose.runtime)
-                implementation(compose.material)
-                implementation(compose.materialIconsExtended)
-                @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
-                implementation(compose.components.resources)
-                api(libs.decompose)
-                api(libs.essenty)
-                implementation(libs.decompose.compose)
-                implementation(libs.kermit)
-                implementation(libs.kotlinx.coroutines.core)
-                implementation(libs.kotlinx.serialization.json)
-                implementation(libs.kotlinx.datetime)
-                implementation(libs.koin.core)
-                implementation(libs.coil.compose)
-                implementation(libs.coil.network)
-                implementation(libs.paging.common)
-                implementation(libs.paging.compose)
-            }
+            implementation(compose.runtime)
+            implementation(compose.material)
+            implementation(compose.materialIconsExtended)
+            @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
+            implementation(compose.components.resources)
+            api(libs.decompose)
+            api(libs.essenty)
+            implementation(libs.decompose.compose)
+            implementation(libs.kermit)
+            implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.kotlinx.serialization.json)
+            implementation(libs.kotlinx.datetime)
+            implementation(libs.koin.core)
+            implementation(libs.coil.compose)
+            implementation(libs.coil.network)
+            implementation(libs.paging.common)
+            implementation(libs.paging.compose)
+            implementation(libs.haze)
         }
 
         commonTest.dependencies {
@@ -76,7 +75,6 @@ kotlin {
         }
 
         androidMain.dependencies {
-            implementation(libs.androidx.appcompat)
             implementation(libs.androidx.activityCompose)
             implementation(libs.compose.uitooling)
             implementation(libs.kotlinx.coroutines.android)
