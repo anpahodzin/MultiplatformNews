@@ -110,7 +110,6 @@ private fun NewsTopHeadlinesContent(
                 items(10) {
                     ShimmerBox(
                         modifier = Modifier
-                            .animateItemPlacement()
                             .fillMaxWidth()
                             .height(160.dp)
                             .padding(
@@ -126,14 +125,12 @@ private fun NewsTopHeadlinesContent(
                     val item = pagingItems[index]
                     if (item != null) {
                         NewsCard(
-                            modifier = Modifier.animateItemPlacement(),
                             news = item,
                             onNewsSelected = onNewsSelected
                         )
                     } else {
                         ShimmerBox(
                             modifier = Modifier
-                                .animateItemPlacement()
                                 .fillMaxWidth()
                                 .height(160.dp)
                                 .padding(

@@ -1,4 +1,8 @@
+@file:OptIn(ExperimentalKotlinGradlePluginApi::class)
+
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSetTree
 
 plugins {
     alias(libs.plugins.multiplatform)
@@ -10,11 +14,8 @@ plugins {
 
 kotlin {
     androidTarget {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "1.8"
-            }
-        }
+        //https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-test.html
+        instrumentedTestVariant.sourceSetTree.set(KotlinSourceSetTree.test)
     }
 
     jvm()
@@ -63,8 +64,8 @@ kotlin {
             implementation(libs.kotlinx.serialization.json)
             implementation(libs.kotlinx.datetime)
             implementation(libs.koin.core)
-            implementation(libs.coil.compose)
-            implementation(libs.coil.network)
+            implementation(libs.coil)
+            implementation(libs.coil.network.ktor)
             implementation(libs.paging.common)
             implementation(libs.paging.compose)
             implementation(libs.haze)
