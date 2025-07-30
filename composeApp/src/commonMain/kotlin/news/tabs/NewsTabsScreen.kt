@@ -1,33 +1,18 @@
 package news.tabs
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.navigationBarsPadding
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.unit.IntSize
-import com.arkivanov.decompose.ExperimentalDecomposeApi
-import com.arkivanov.decompose.extensions.compose.pages.Pages
+import com.arkivanov.decompose.extensions.compose.pages.ChildPages
 import com.arkivanov.decompose.extensions.compose.pages.PagesScrollAnimation
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
-import dev.chrisbanes.haze.HazeState
-import dev.chrisbanes.haze.HazeStyle
-import dev.chrisbanes.haze.haze
-import dev.chrisbanes.haze.hazeChild
+import dev.chrisbanes.haze.*
 import extension.pxToDp
-import multiplatformnews.composeapp.generated.resources.Res
-import multiplatformnews.composeapp.generated.resources.everything
-import multiplatformnews.composeapp.generated.resources.favorite
-import multiplatformnews.composeapp.generated.resources.ic_favorite_24
-import multiplatformnews.composeapp.generated.resources.ic_news_24
-import multiplatformnews.composeapp.generated.resources.ic_search_24
-import multiplatformnews.composeapp.generated.resources.top
+import multiplatformnews.composeapp.generated.resources.*
 import news.eveything.NewsEverythingScreen
 import news.favorite.NewsFavoriteScreen
 import news.topheadlines.NewsTopHeadlinesScreen
@@ -37,7 +22,6 @@ import theme.AppColors
 import view.BottomBarTab
 import view.CustomBottomNavigationBar
 
-@OptIn(ExperimentalDecomposeApi::class, ExperimentalFoundationApi::class)
 @Composable
 fun NewsTabsScreen(
     component: NewsTabsComponent,
@@ -81,8 +65,8 @@ fun NewsTabsScreen(
     Box(modifier = modifier) {
         var bottomBarSize by remember { mutableStateOf(IntSize.Zero) }
 
-        Pages(
-            modifier = Modifier.haze(state = hazeState),
+        ChildPages(
+            modifier = Modifier.hazeSource(state = hazeState),
             pages = childPages,
             onPageSelected = component::selectPage,
             scrollAnimation = PagesScrollAnimation.Default,
@@ -109,10 +93,10 @@ fun NewsTabsScreen(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .onSizeChanged { bottomBarSize = it }
-                .hazeChild(
+                .hazeEffect(
                     state = hazeState,
                     style = HazeStyle(
-                        tint = AppColors.white.copy(alpha = 0.6f),
+                        tint = HazeTint(AppColors.white.copy(alpha = 0.6f)),
                         noiseFactor = 0.01f
                     )
                 )
