@@ -42,11 +42,6 @@ kotlin {
     }
 
     sourceSets {
-        all {
-            languageSettings {
-                optIn("org.jetbrains.compose.resources.ExperimentalResourceApi")
-            }
-        }
         commonMain.dependencies{
             implementation(projects.domainModule)
             implementation(projects.dataModule)
@@ -54,7 +49,6 @@ kotlin {
             implementation(compose.runtime)
             implementation(compose.material)
             implementation(compose.materialIconsExtended)
-            @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
             implementation(compose.components.resources)
             api(libs.decompose)
             api(libs.essenty)
@@ -111,21 +105,10 @@ android {
         applicationId = "org.example.kmpnews.androidApp"
         versionCode = 1
         versionName = "1.0.0"
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-    sourceSets["main"].apply {
-        manifest.srcFile("src/androidMain/AndroidManifest.xml")
-        res.srcDirs("src/androidMain/resources")
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.4"
-    }
+
     buildTypes {
         getByName("release") {
             signingConfig = signingConfigs.getByName("debug")
@@ -143,8 +126,4 @@ compose.desktop {
             packageVersion = "1.0.0"
         }
     }
-}
-
-compose.experimental {
-    web.application {}
 }

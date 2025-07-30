@@ -1,8 +1,9 @@
 import androidx.compose.ui.ExperimentalComposeUiApi
-import androidx.compose.ui.window.CanvasBasedWindow
+import androidx.compose.ui.window.ComposeViewport
 import com.arkivanov.decompose.DefaultComponentContext
 import com.arkivanov.essenty.lifecycle.LifecycleRegistry
 import di.initKoin
+import kotlinx.browser.document
 import org.jetbrains.skiko.wasm.onWasmReady
 import root.component.RootDefaultComponent
 
@@ -13,7 +14,8 @@ fun main() {
     val lifecycle = LifecycleRegistry()
     val root = RootDefaultComponent(DefaultComponentContext(lifecycle))
     onWasmReady {
-        CanvasBasedWindow("MultiplatformNews") {
+        val body = document.body ?: return@onWasmReady
+        ComposeViewport(body) {
             App(root)
         }
     }

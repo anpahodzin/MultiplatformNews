@@ -1,8 +1,3 @@
-@file:OptIn(ExperimentalKotlinGradlePluginApi::class)
-
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
-import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSetTree
-
 plugins {
     alias(libs.plugins.multiplatform)
     alias(libs.plugins.androidLibrary)
@@ -10,10 +5,7 @@ plugins {
 }
 
 kotlin {
-    androidTarget {
-        //https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-test.html
-        instrumentedTestVariant.sourceSetTree.set(KotlinSourceSetTree.test)
-    }
+    androidTarget {}
 
     jvm()
 
